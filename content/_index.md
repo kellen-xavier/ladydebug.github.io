@@ -1,5 +1,5 @@
 ---
-title: My Site
+title: My Site - Ladybug
 toc: false
 ---
 
