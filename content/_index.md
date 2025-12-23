@@ -1,17 +1,16 @@
 ---
-title: My Site - Ladybug
-toc: false
+title: Lady{de}bug - Blog
+toc: true
 ---
 
-This is the landing page.
+It's not possible. No, it's necessary.
 
-## Explore
+---
 
-{{< cards >}}
-  {{< card link="docs" title="Docs" icon="book-open" >}}
-  {{< card link="about" title="About" icon="user" >}}
-{{< /cards >}}
+## 2025
 
-## Documentation
+- [Linux Básico](/docs/2025/dezembro/linux-basico.md)
 
-For more information, visit [Hextra](https://imfing.github.io/hextra).
+## 2024
+
+[Cypress e Boas Práticas de Automação](/docs/2024/outubro/cypress-boas-praticas.md)

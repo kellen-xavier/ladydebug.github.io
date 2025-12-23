@@ -1,10 +1,6 @@
 ---
-title: Hi
-type: docs
-prev: docs/resume-month
-next: docs/2025/
-sidebar:
-  open: true
+title: "Estudos de 2025"
+weight: 2
 ---
 
-Hi!
+Anotações de 2025: Aqui estão todos os meus estudos do ano de 2025 separados por mês.

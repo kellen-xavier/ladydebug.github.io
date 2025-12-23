@@ -12,4 +12,12 @@ Specifically, of the chapter one [get to know the book here](https://www.amazon.
 
 ## Clone and Runner
 
-loading ....
+```bash
+git clone https://github.com/kellen-xavier/ladydebug.github.io.git
+
+cd ladydebug.github. io
+
+hugo mod tidy
+
+hugo server -D -F
+```
