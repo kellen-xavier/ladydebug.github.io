@@ -1,5 +1,5 @@
 # Hugo configuration file
-title: My Site
+title: My Blog
 
 # import hextra as module
 module:
@@ -16,16 +16,25 @@ markup:
   highlight:
     noClasses: false
 
+  footer:
+    displayCopyright: false
+    displayPoweredBy: true
+
+  editURL: 
+    enable: true
+    base:  "https://github.com/kellen-xavier/ladydebug. github.io/edit/main/content"
+
+  # CSS custom
+  customCSS:
+    - css/custom.css
+
 menu:
   main:
-    - name: Docs
-      pageRef: /docs
-      weight: 1
     - name: About
       pageRef: /about
       weight: 2
     - name: Contact ↗
-      url: "https://github.com/imfing"
+      url: "https://ladydebug.keepo.bio/"
       weight: 3
     - name: Search
       weight: 4
@@ -33,7 +42,7 @@ menu:
         type: search
     - name: GitHub
       weight: 5
-      url: "https://github.com/imfing/hextra-starter-template"
+      url: "https://github.com/kellen-xavier"
       params:
         icon: github
     - name: Twitter
