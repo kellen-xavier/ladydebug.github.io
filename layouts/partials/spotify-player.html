@@ -1,0 +1,79 @@
+{{- /* 
+  Spotify Player Fixo
+  Este componente adiciona um player do Spotify fixo na parte inferior da tela
+  que permanece visível ao rolar a página. 
+  
+  Configuração no hugo.yaml:
+    params:
+      spotify: 
+        enabled: true
+        playlistId: "37i9dQZEVXdd7MK8bk31fc"
+*/ -}}
+
+{{- if site.Params.spotify.enabled -}}
+<aside id="spotify-player-wrapper" class="spotify-player-fixed" aria-label="Spotify Music Player">
+  <!-- Botao de minimizar/maximizar -->
+  <button 
+    id="spotify-toggle"
+    class="spotify-toggle-btn"
+    aria-label="Toggle Spotify Player"
+    aria-expanded="true"
+    onclick="toggleSpotifyPlayer()">
+    <svg class="spotify-icon-minimize" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+    <svg class="spotify-icon-maximize" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Player do Spotify -->
+  <div id="spotify-player-content" class="spotify-player-content">
+    <iframe 
+      data-testid="spotify-embed-iframe" 
+      src="https://open.spotify.com/embed/playlist/{{ site.Params.spotify.playlistId | default "37i9dQZEVXdd7MK8bk31fc" }}?utm_source=generator&theme=0" 
+      width="100%" 
+      height="152" 
+      style="border: none;"
+      allowfullscreen="" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+      loading="lazy"
+      title="Spotify Playlist Player">
+    </iframe>
+  </div>
+</aside>
+
+<script>
+  function toggleSpotifyPlayer() {
+    const wrapper = document.getElementById('spotify-player-wrapper');
+    const content = document.getElementById('spotify-player-content');
+    const toggle = document.getElementById('spotify-toggle');
+    const iconMin = toggle.querySelector('.spotify-icon-minimize');
+    const iconMax = toggle.querySelector('.spotify-icon-maximize');
+    
+    if (wrapper.classList.contains('minimized')) {
+      wrapper.classList.remove('minimized');
+      content.style.display = 'block';
+      iconMin.style.display = 'block';
+      iconMax.style. display = 'none';
+      toggle.setAttribute('aria-expanded', 'true');
+      localStorage.setItem('spotifyPlayerState', 'expanded');
+    } else {
+      wrapper.classList.add('minimized');
+      content.style.display = 'none';
+      iconMin.style.display = 'none';
+      iconMax.style. display = 'block';
+      toggle.setAttribute('aria-expanded', 'false');
+      localStorage. setItem('spotifyPlayerState', 'minimized');
+    }
+  }
+
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedState = localStorage.getItem('spotifyPlayerState');
+    if (savedState === 'minimized') {
+      toggleSpotifyPlayer();
+    }
+  });
+</script>
+{{- end -}}

@@ -1,0 +1,165 @@
+/* ========================================
+   SPOTIFY PLAYER FIXO
+   ======================================== */
+
+/* Container principal do player */
+.spotify-player-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #1db954 0%, #191414 100%);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
+  backdrop-filter: blur(10px);
+}
+
+/* Estado minimizado */
+.spotify-player-fixed.minimized {
+  transform: translateY(calc(100% - 40px));
+}
+
+/* Conteudo do player */
+.spotify-player-content {
+  padding: 0.75rem 1rem 1rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.spotify-player-fixed.minimized .spotify-player-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Botao de toggle */
+.spotify-toggle-btn {
+  position: absolute;
+  top: -35px;
+  right: 20px;
+  background: #1db954;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  width: 50px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
+}
+
+.spotify-toggle-btn:hover {
+  background: #1ed760;
+}
+
+.spotify-toggle-btn:focus {
+  outline: 2px solid #1ed760;
+  outline-offset: 2px;
+}
+
+/* Adiciona espaco no body para nao sobrepor conteudo */
+body {
+  padding-bottom: 112px !important;
+  transition: padding-bottom 0.3s ease-in-out;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .spotify-player-content {
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+  
+  body {
+    padding-bottom: 152px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .spotify-player-fixed iframe {
+    height: 80px !important;
+  }
+  
+  .spotify-player-content {
+    padding: 0.5rem;
+  }
+  
+  .spotify-toggle-btn {
+    right: 10px;
+    width: 45px;
+    height: 32px;
+  }
+  
+  body {
+    padding-bottom: 100px !important;
+  }
+  
+  body:has(.spotify-player-fixed.minimized) {
+    padding-bottom: 32px !important;
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .spotify-player-fixed iframe {
+    height: 60px !important;
+  }
+  
+  body {
+    padding-bottom: 80px !important;
+  }
+}
+
+/* ========================================
+   MODO ESCURO
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  .spotify-player-fixed {
+    background: linear-gradient(135deg, #1db954 0%, #121212 100%);
+  }
+}
+
+/* ========================================
+   ACESSIBILIDADE
+   ======================================== */
+
+/* Reduzir animacoes para usuarios com preferencia */
+@media (prefers-reduced-motion: reduce) {
+  .spotify-player-fixed,
+  .spotify-player-content,
+  .spotify-toggle-btn,
+  body {
+    transition: none !important;
+  }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+  .spotify-player-fixed {
+    border-top: 3px solid #1db954;
+  }
+  
+  .spotify-toggle-btn {
+    border:  2px solid white;
+  }
+}
+
+/* ========================================
+   PRINT (ocultar ao imprimir)
+   ======================================== */
+
+@media print {
+  .spotify-player-fixed {
+    display: none !important;
+  }
+  
+  body {
+    padding-bottom: 0 !important;
+  }
+}

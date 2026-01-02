@@ -27,6 +27,10 @@ markup:
   # CSS custom
   customCSS:
     - css/custom.css
+    
+spotify:
+    enabled:  true
+    playlistId: "37i9dQZEVXdd7MK8bk31fc"
 
 menu:
   main:
