@@ -4,21 +4,21 @@ date: 2026-07-06
 slug: bot-planner-projeto-para-acompanhamento-do-desenvolvimento-pessoal
 ---
 
-Recentemente estive a desenvolver alguns projetos de estudos com IA, e estava precisando me organizar, de, quanto tempo estive a desenvolver — tempo corrido — 
+Recentemente estive a desenvolver alguns projetos de estudos com IA, e estava precisando me organizar, de, quanto tempo estive a desenvolver — tempo corrido —
 
-também ao esta desenvolvendo algo geralmente eu costumo ler a documentação da lingagem para leitura de algumas práticas, links de documentos, docs que eu estou escrevendo para determinada característica do projeto. Criar tarefas que me lembrei no ato que estava a desenvolver, e verifiquei que pode ser terminada logo após a tarefa que estou a fazer. Além de comentários do que foi realizado, esse acompanhamento de forma geral. 
+também ao esta desenvolvendo algo geralmente eu costumo ler a documentação da lingagem para leitura de algumas práticas, links de documentos, docs que eu estou escrevendo para determinada característica do projeto. Criar tarefas que me lembrei no ato que estava a desenvolver, e verifiquei que pode ser terminada logo após a tarefa que estou a fazer. Além de comentários do que foi realizado, esse acompanhamento de forma geral.
 
 Com base nesse problema, pensei em algo prático que eu possa fazer enquanto estou desenvolvendo. Ou seja comando `/inicio` quando inicio a atividade, `/link` para adicionar documentações entre outros importantes. `/nota` quando eu quiser adicionar notas comentários, `task` para quando quiser criar uma tarefas, `fim` quando finalizar tudo. Após isso gere um `Release notes` com o que foi feito e quais as tarefas ficaram pendentes.
 
 Então lendo uma [postagem em um blog](https://akitaonrails.com/2026/02/16/vibe-code-do-zero-a-producao-em-6-dias-the-m-akita-chronicles/#spoiler-do-processo) e pensei em criar o bot com gestão pessoal para auxiliar no ciclo de desenvolvimento pessoal sem fricção e que gere um report notes no fim do trabalho.
 
-Podendo também aplicar para compartilhar caso queira com alguém do time (desenvolvimento orientado com metodologia XP). 
+Podendo também aplicar para compartilhar caso queira com alguém do time (desenvolvimento orientado com metodologia XP).
 
 ---
 
-Criei o repositório no github https://github.com/kellen-xavier/ladydebug-bot-planner ~~inicialmente privado mas irei liberar em seguida~~, open-source — estou a corrigir algumas questões de segurança — e primeiro criar o bot, inicialmente interação é via Discord, mas vai abranger multicanal de comunicação (pensei em slack e dicord principal) as demais particularmente não me interessei muito.
+Criei o repositório no github <https://github.com/kellen-xavier/ladydebug-bot-planner> ~~inicialmente privado mas irei liberar em seguida~~, open-source — estou a corrigir algumas questões de segurança — e primeiro criar o bot, inicialmente interação é via Discord, mas vai abranger multicanal de comunicação (pensei em slack e dicord principal) as demais particularmente não me interessei muito.
 
-**Primeira Fase do desenvolvimento**
+## Primeira Fase do desenvolvimento
 
 ![image.png](image.png)
 
@@ -32,11 +32,11 @@ Nos testes iniciais, ficou bem poluído os comandos no chat unificado, então pe
 
 ### **Organização do Bot**
 
-Para configurar o bot é simples, deve-se seguir a documentação oficial neste link: [**Building your first Discord Bot**](https://docs.discord.com/developers/quick-start/getting-started) 
+Para configurar o bot é simples, deve-se seguir a documentação oficial neste link: [**Building your first Discord Bot**](https://docs.discord.com/developers/quick-start/getting-started)
 
 ![image.png](image-3.png)
 
-**Para estes estudo de caso |  Como configurar o Bot:** 
+**Para estes estudo de caso |  Como configurar o Bot:**
 
 1. Vá no Developer Portal do Discord.
 2. Abrir o app ladydebug-bot-planner.
@@ -70,7 +70,7 @@ Visão geral
 [ ] Executar testes/cobertura disponível
 [ ] Consolidar lacunas de cobertura e recomendações
 
-**Funcionalidades Com Testes**
+### Funcionalidades Com Testes
 
 Criei o report em docs/TEST_COVERAGE_REPORT.md aqui ele documenta o seguinte:
 
@@ -95,7 +95,7 @@ Criei o report em docs/TEST_COVERAGE_REPORT.md aqui ele documenta o seguinte:
 
 ---
 
-**Erros encontrado:** 
+**Erros encontrado:**
 
 ```jsx
 python -m daily.main
@@ -128,12 +128,12 @@ Traceback (most recent call last):
 discord.app_commands.errors.CommandInvokeError: Command 'inicio' raised an exception: DayAlreadyOpen: Já existe um dia aberto para este usuário.
 ```
 
-**Motivo**: 
+**Motivo**:
 
 DayAlreadyOpen: Já existe um dia aberto para este usuário.
 Isso acontece porque você executou /inicio, o bot abriu uma sessão no daily.db, e depois você chamou /inicio de novo sem antes fechar com /fim.
 
-**Explicação**: 
+**Explicação**:
 
 Causa Técnica
 O core está correto em impedir dois dias abertos:
@@ -154,7 +154,7 @@ Ainda em modo planejamento, então não vou editar arquivos agora. O ajuste reco
 5. Documentar configuração local e produção no README.
 6. Adicionar testes para esses casos.
 
-**Comportamento Esperado Após Ajustes**
+## Comportamento Esperado Após Ajustes
 
 Validar `/inicio` com dia já aberto mas sem terminar atividades:
 Deve retornar:
@@ -182,7 +182,8 @@ Deve retornar:
 Mensagem:
 ⚠️ Nenhum dia aberto. Use /inicio primeiro.
 
-7. Arquivos Que Devem Mudar
+1. Arquivos Que Devem Mudar
+
 - src/daily/command_router.py
 - src/daily/adapters/discord_bot.py
 - src/daily/main.py
@@ -192,7 +193,7 @@ Mensagem:
 - tests/test_discord_bot.py
 - tests/test_main_config.py
 
-**O Que Mudou:** 
+**O Que Mudou:**
 
 - src/daily/command_router.py
 - /inicio com dia já aberto agora retorna:
@@ -224,7 +225,7 @@ DISCORD_CLIENT_ID numérico se informado.
 
 ---
 
-**Visão Geral de Testes com Discord**
+### Visão Geral de Testes com Discord
 
 ![image.png](image-4.png)
 
@@ -236,7 +237,7 @@ Foi colocado um segundo canal de texto onde que, com o comando `/fim` finaliza o
 
 Agora foi visto que precisa ser finalizada as atividades criadas no dia. Para isso segue a nova funcionalidade.
 
-**Funcionalidade**: Dado que o usuário conclua e foi finalizada a “Tarefa” criada, Então deve adicionar o comando `/fim-task` com a seguinte ação: 
+**Funcionalidade**: Dado que o usuário conclua e foi finalizada a “Tarefa” criada, Então deve adicionar o comando `/fim-task` com a seguinte ação:
 
 **Comportamento esperado:**
 
@@ -244,7 +245,7 @@ URL: para adicionar o link de uma atividade concluida
 Titulo Tarefa: Nome da Minha task aqui
 Tempo da atividade aberta: xx minutos / xx horas / xx dias
 
-Dado que a atividade contém comentário, 
+Dado que a atividade contém comentário,
 Quando concluir ação
 Então release notes deve mostrar comentários adicionada a ação
 
@@ -264,6 +265,7 @@ Então release notes deve mostrar comentários adicionada a ação
 8. Start command: python -m daily.main.
 9. Fazer deploy.
 10. Testar no Discord:
+
 - /inicio
 - /nota
 - /pr url:[https://github.com/.../pull/](https://github.com/.../pull/)...

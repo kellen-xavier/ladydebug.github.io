@@ -70,8 +70,8 @@ Ajuste as configurações de senha e segue para a página:
 
 - Acesse [http://localhost:9000](http://localhost:9000/)
 - Login padrão:
-   - Usuário: admin
-   - Senha: admin
+  - Usuário: admin
+  - Senha: admin
 
 Agora vamos configurar para fazer um escaneamento do projeto
 
