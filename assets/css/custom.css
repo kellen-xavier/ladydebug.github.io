@@ -11,10 +11,8 @@
   --ld-muted: #8a7f6d;
   --ld-border: #e6dcc6;
 
-  /* Cor de destaque + complementar, usadas em links, marcadores e nos
-     "Destaques" da home. */
+  /* Cor de destaque, usada em links, marcadores e nos "Destaques" da home. */
   --ld-accent: #d468a5;
-  --ld-accent-2: #68d497;
 }
 
 .dark {
@@ -53,7 +51,7 @@ body,
 /* Destaques (recolhível, sem JS) */
 .ld-highlights {
   border: 1px solid var(--ld-border);
-  border-left: 3px solid var(--ld-accent-2);
+  border-left: 3px solid var(--ld-accent);
   border-radius: 0.75rem;
   background: var(--ld-bg-soft);
   margin: 0 0 2.5rem;
@@ -81,8 +79,8 @@ body,
   flex-shrink: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--ld-accent-2);
-  border: 1px solid var(--ld-accent-2);
+  color: var(--ld-accent);
+  border: 1px solid var(--ld-accent);
   border-radius: 999px;
   padding: 0.2rem 0.75rem;
 }
@@ -101,7 +99,7 @@ body,
 }
 
 .ld-highlights__list a {
-  color: var(--ld-accent-2);
+  color: var(--ld-accent);
   font-weight: 600;
   text-decoration: none;
 }
