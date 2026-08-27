@@ -10,17 +10,37 @@ Programming and Quality. This is not a tutorials. This is my daily study, buildi
 Well ok. Where from this idea? Good, this ideia emerge from the book The Programatic Programmer.
 Specifically, of the chapter one [get to know the book here](https://www.amazon.com.br/Programador-Pragm%C3%A1tico-Aprendiz-Mestre/dp/8577807002).
 
-## Clone Runner and Testing
+## Testando localmente
+
+**Pré-requisitos:** [Hugo extended](https://gohugo.io/installation/) `0.147.9`+
+e [Go](https://go.dev/dl/) (só é usado pra baixar o tema via Hugo Modules,
+não tem código Go no projeto). Se preferir não instalar nada na sua máquina,
+o repo já vem pronto pra abrir num Dev Container (`.devcontainer/`) ou no
+[Gitpod](https://gitpod.io/#https://github.com/kellen-xavier/ladydebug.github.io) —
+os dois sobem o ambiente completo (Hugo, Go, Ruby) sozinhos.
 
 ```bash
 git clone https://github.com/kellen-xavier/ladydebug.github.io.git
+cd ladydebug.github.io
 
-cd ladydebug.github. io
-
+# baixa o tema (Hextra) via Hugo Modules
 hugo mod tidy
 
+# sobe o servidor local com live reload
 hugo server -D -F
+```
 
+Abra [http://localhost:1313/](http://localhost:1313/). `-D` mostra posts marcados como `draft: true`
+e `-F` mostra posts com data no futuro — assim dá pra revisar tudo antes de
+publicar. Qualquer mudança em `content/`, `layouts/`, `assets/` ou
+`data/` recarrega a página sozinha.
+
+Antes de abrir um PR, vale rodar também o [lint](#lint-de-markdown) e um build
+de produção igual ao do CI, pra pegar erro de template que só aparece com
+`--minify`:
+
+```bash
+hugo --gc --minify
 ```
 
 ## Lint de Markdown
