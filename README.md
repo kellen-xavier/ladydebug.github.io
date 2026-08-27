@@ -10,17 +10,37 @@ Programming and Quality. This is not a tutorials. This is my daily study, buildi
 Well ok. Where from this idea? Good, this ideia emerge from the book The Programatic Programmer.
 Specifically, of the chapter one [get to know the book here](https://www.amazon.com.br/Programador-Pragm%C3%A1tico-Aprendiz-Mestre/dp/8577807002).
 
-## Clone Runner and Testing
+## Testando localmente
+
+**Pré-requisitos:** [Hugo extended](https://gohugo.io/installation/) `0.147.9`+
+e [Go](https://go.dev/dl/) (só é usado pra baixar o tema via Hugo Modules,
+não tem código Go no projeto). Se preferir não instalar nada na sua máquina,
+o repo já vem pronto pra abrir num Dev Container (`.devcontainer/`) ou no
+[Gitpod](https://gitpod.io/#https://github.com/kellen-xavier/ladydebug.github.io) —
+os dois sobem o ambiente completo (Hugo, Go, Ruby) sozinhos.
 
 ```bash
 git clone https://github.com/kellen-xavier/ladydebug.github.io.git
+cd ladydebug.github.io
 
-cd ladydebug.github. io
-
+# baixa o tema (Hextra) via Hugo Modules
 hugo mod tidy
 
+# sobe o servidor local com live reload
 hugo server -D -F
+```
 
+Abra [http://localhost:1313/](http://localhost:1313/). `-D` mostra posts marcados como `draft: true`
+e `-F` mostra posts com data no futuro — assim dá pra revisar tudo antes de
+publicar. Qualquer mudança em `content/`, `layouts/`, `assets/` ou
+`data/` recarrega a página sozinha.
+
+Antes de abrir um PR, vale rodar também o [lint](#lint-de-markdown) e um build
+de produção igual ao do CI, pra pegar erro de template que só aparece com
+`--minify`:
+
+```bash
+hugo --gc --minify
 ```
 
 ## Lint de Markdown
@@ -48,3 +68,21 @@ Quando `develop` é mergeada em `main`, o workflow `.github/workflows/release.ya
 3. cria a tag `vX.Y.Z` e publica a GitHub Release com as notas dessa versão.
 
 Se não houver commit relevante (`feat`/`fix`/...) desde a última tag, nada é publicado.
+
+## Doca (dock) do rodapé
+
+Barra fixa no rodapé com janelas flutuantes (`<dialog>`, arrastáveis, sem
+libs), no estilo desktop/OS do fim dos anos 2000. Fica isolada do resto do
+tema em arquivos próprios:
+
+- `data/dock.yaml` — quais botões existem, rótulo, ícone e link do Spotify.
+- `data/events.yaml` — lista de próximos eventos do painel "Calendário".
+- `content/drafts/` — rascunhos (`hugo new drafts/nome.md`); cada um vira uma
+  página própria, mas fica fora do blog, do RSS e do sitemap.
+- `assets/css/desktop-dock.css` e `assets/js/desktop-dock.js` — estilo e
+  comportamento, separados do `custom.css`/tema.
+
+Pra trocar o link do Spotify ou adicionar um evento, é só editar os `.yaml`
+acima — não precisa mexer nos templates.
+
+Ícones: [Pixelarticons](https://github.com/halfmage/pixelarticons) (MIT).
