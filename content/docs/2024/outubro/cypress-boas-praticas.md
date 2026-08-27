@@ -9,6 +9,7 @@ tags:
 - praticas
 - docs
 draft: false
+featured: true
 ---
 
 Evitando o uso de *Falsos Positivos* com Cypress. Segue abaixo um exemplo de um código, e um arquivo commands com um simples login na aplicação:
