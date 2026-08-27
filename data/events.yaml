@@ -1,0 +1,11 @@
+# Lista de próximos eventos mostrada no painel "Calendário" da doca.
+# date no formato "AAAA-MM-DD" (ordena e filtra certo por comparação de texto).
+# Deixe a lista vazia ([]) se não houver nada no momento — o painel mostra um
+# aviso nesse caso.
+#
+# Exemplo:
+# - date: "2026-09-15"
+#   title: "Exemplo de evento"
+#   url: "https://example.com"
+
+[]

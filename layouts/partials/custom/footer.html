@@ -1,0 +1,82 @@
+{{/* Doca fixa + janelas flutuantes. Botões vêm de data/dock.yaml; cada
+     "panel" (spotify | events | drafts) tem seu próprio corpo abaixo. */}}
+{{- $today := now.Format "2006-01-02" -}}
+
+<nav class="dock" role="toolbar" aria-label="Painéis do site">
+  {{- range site.Data.dock }}
+    {{- $icon := resources.Get (printf "image/icons/pixelarticons-%s.svg" .icon) }}
+    <button
+      type="button"
+      class="dock__item"
+      data-dock-target="dock-window-{{ .id }}"
+      aria-haspopup="dialog"
+      aria-pressed="false"
+    >
+      {{- with $icon }}{{ .Content | safeHTML }}{{ end }}
+      <span class="dock__label">{{ .label }}</span>
+    </button>
+  {{- end }}
+</nav>
+
+{{- range site.Data.dock }}
+  {{- $item := . }}
+  <dialog id="dock-window-{{ .id }}" class="dock-window" aria-label="{{ .label }}">
+    <header class="dock-window__bar">
+      <span>{{ .label }}</span>
+      <button type="button" class="dock-window__close" data-dock-close aria-label="Fechar">×</button>
+    </header>
+
+    {{- if eq .panel "spotify" }}
+      <div class="dock-window__body dock-window__embed">
+        <div data-embed-src="{{ replace .spotify_url `open.spotify.com/` `open.spotify.com/embed/` }}"></div>
+        <a class="dock-window__spotify-link" href="{{ .spotify_url }}" target="_blank" rel="noreferrer">
+          Abrir no Spotify ↗
+        </a>
+      </div>
+
+    {{- else if eq .panel "events" }}
+      {{- $upcoming := where site.Data.events "date" ">=" $today }}
+      <div class="dock-window__body">
+        {{- if $upcoming }}
+          <ul class="dock-window__list">
+            {{- range (sort $upcoming "date") }}
+              <li>
+                {{- if .url }}
+                  <a class="dock-window__item-title" href="{{ .url }}" target="_blank" rel="noreferrer">{{ .title }}</a>
+                {{- else }}
+                  <span class="dock-window__item-title">{{ .title }}</span>
+                {{- end }}
+                <span class="dock-window__item-meta">{{ .date }}</span>
+              </li>
+            {{- end }}
+          </ul>
+        {{- else }}
+          <p class="dock-window__empty">Nenhum evento no momento.</p>
+        {{- end }}
+      </div>
+
+    {{- else if eq .panel "drafts" }}
+      {{- $drafts := slice }}
+      {{- with site.GetPage "/drafts" }}{{ $drafts = .RegularPages.ByDate.Reverse }}{{ end }}
+      <div class="dock-window__body">
+        {{- if $drafts }}
+          <ul class="dock-window__list">
+            {{- range $drafts }}
+              <li>
+                <a class="dock-window__item-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                <span class="dock-window__item-meta">{{ .Date.Format "2006-01-02" }}</span>
+              </li>
+            {{- end }}
+          </ul>
+        {{- else }}
+          <p class="dock-window__empty">Nenhum rascunho no momento.</p>
+        {{- end }}
+      </div>
+    {{- end }}
+  </dialog>
+{{- end }}
+
+{{- with resources.Get "js/desktop-dock.js" }}
+  {{ $js := . | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}

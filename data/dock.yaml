@@ -1,0 +1,21 @@
+# Botões da doca fixa no rodapé do site (layouts/partials/custom/footer.html).
+# icon: nome do arquivo em assets/image/icons/pixelarticons-<icon>.svg
+# panel: qual painel abre — "spotify", "events" ou "drafts" (lógica de cada
+#        um está direto no partial, já que cada tipo renderiza algo diferente)
+
+- id: music
+  label: "Música"
+  icon: music
+  panel: spotify
+  # Troque pelo link de um perfil, playlist ou álbum seu no Spotify.
+  spotify_url: "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+
+- id: calendar
+  label: "Calendário"
+  icon: calendar
+  panel: events
+
+- id: drafts
+  label: "Rascunhos"
+  icon: archive
+  panel: drafts

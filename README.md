@@ -48,3 +48,21 @@ Quando `develop` é mergeada em `main`, o workflow `.github/workflows/release.ya
 3. cria a tag `vX.Y.Z` e publica a GitHub Release com as notas dessa versão.
 
 Se não houver commit relevante (`feat`/`fix`/...) desde a última tag, nada é publicado.
+
+## Doca (dock) do rodapé
+
+Barra fixa no rodapé com janelas flutuantes (`<dialog>`, arrastáveis, sem
+libs), no estilo desktop/OS do fim dos anos 2000. Fica isolada do resto do
+tema em arquivos próprios:
+
+- `data/dock.yaml` — quais botões existem, rótulo, ícone e link do Spotify.
+- `data/events.yaml` — lista de próximos eventos do painel "Calendário".
+- `content/drafts/` — rascunhos (`hugo new drafts/nome.md`); cada um vira uma
+  página própria, mas fica fora do blog, do RSS e do sitemap.
+- `assets/css/desktop-dock.css` e `assets/js/desktop-dock.js` — estilo e
+  comportamento, separados do `custom.css`/tema.
+
+Pra trocar o link do Spotify ou adicionar um evento, é só editar os `.yaml`
+acima — não precisa mexer nos templates.
+
+Ícones: [Pixelarticons](https://github.com/halfmage/pixelarticons) (MIT).
