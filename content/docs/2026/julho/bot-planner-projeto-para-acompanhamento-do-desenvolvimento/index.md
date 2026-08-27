@@ -45,8 +45,12 @@ Para configurar o bot é simples, deve-se seguir a documentação oficial neste 
 5. Copie o token novo.
 6. Atualize DISCORD_TOKEN no .env.
 7. Rode de novo:
-`set -a; source .env; set +a
-python -m daily.main`
+
+   ```bash
+   set -a; source .env; set +a
+   python -m daily.main
+   ```
+
 8. Configuração Mínima Local
 
 Seu .env local deve ter pelo menos:
@@ -197,7 +201,7 @@ Mensagem:
 
 - src/daily/command_router.py
 - /inicio com dia já aberto agora retorna:
-🟡 Já existe um dia aberto para você. Use /continuar para seguir o seu dia.
+  🟡 Já existe um dia aberto para você. Use /continuar para seguir o seu dia.
 - Novo método continuar.
 - /nota, /link e /fim agora tratam NoOpenDay com mensagens amigáveis.
 - /link agora verifica dia aberto antes de buscar/resumir URL.
@@ -207,9 +211,9 @@ Mensagem:
 - Se DISCORD_CLIENT_ID estiver configurado, o erro imprime URL de convite correta.
 - src/daily/main.py
 - Adicionada validação de ambiente:
-DISCORD_TOKEN obrigatório.
-DISCORD_GUILD_ID numérico se informado.
-DISCORD_CLIENT_ID numérico se informado.
+  DISCORD_TOKEN obrigatório.
+  DISCORD_GUILD_ID numérico se informado.
+  DISCORD_CLIENT_ID numérico se informado.
 - .env.example
 - Adicionado DISCORD_CLIENT_ID.
 - [README.md](http://readme.md/)
