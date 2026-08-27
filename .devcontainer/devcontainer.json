@@ -5,8 +5,12 @@
       "extended": true,
       "version": "0.147.9"
     },
-    "ghcr.io/devcontainers/features/node:1": {}
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.3"
+    }
   },
+  "postCreateCommand": "bundle install",
   "customizations": {
     "vscode": {
       "extensions": [

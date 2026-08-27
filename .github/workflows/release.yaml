@@ -1,0 +1,77 @@
+name: Release
+
+# Roda sempre que develop é mergeada em main (ou qualquer outro push direto
+# em main). Gera o CHANGELOG.md (Keep a Changelog) com o git-cliff, cria a
+# tag semver automaticamente e publica a GitHub Release com as notas.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalar git-cliff
+        uses: taiki-e/install-action@git-cliff
+
+      - name: Verificar se há algo para lançar
+        id: release
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || true)
+          NEXT_VERSION=$(git-cliff --bumped-version 2>/dev/null)
+
+          if [ -n "$LAST_TAG" ] && [ "$LAST_TAG" = "$NEXT_VERSION" ]; then
+            echo "Nada para lançar (nenhum commit relevante desde $LAST_TAG)."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Próxima versão: $NEXT_VERSION"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Atualizar CHANGELOG.md
+        if: steps.release.outputs.skip == 'false'
+        run: git-cliff --tag "${{ steps.release.outputs.version }}" -o CHANGELOG.md
+
+      - name: Commitar CHANGELOG.md
+        if: steps.release.outputs.skip == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore(release): ${{ steps.release.outputs.version }}"
+          git push origin HEAD:main
+
+      - name: Criar tag
+        if: steps.release.outputs.skip == 'false'
+        run: |
+          git tag "${{ steps.release.outputs.version }}"
+          git push origin "${{ steps.release.outputs.version }}"
+
+      - name: Gerar notas da release
+        if: steps.release.outputs.skip == 'false'
+        run: |
+          git-cliff --tag "${{ steps.release.outputs.version }}" --latest --strip header \
+            -o /tmp/release-notes.md
+
+      - name: Publicar GitHub Release
+        if: steps.release.outputs.skip == 'false'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.release.outputs.version }}" \
+            --title "${{ steps.release.outputs.version }}" \
+            --notes-file /tmp/release-notes.md
