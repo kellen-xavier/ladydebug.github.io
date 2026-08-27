@@ -8,7 +8,7 @@
   icon: music
   panel: spotify
   # Troque pelo link de um perfil, playlist ou álbum seu no Spotify.
-  spotify_url: "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M"
+  spotify_url: "https://open.spotify.com/playlist/1hzBaroEetOyVIbalKSDwg?si=17083f6a7ca94c55"
 
 - id: calendar
   label: "Calendário"
