@@ -7,10 +7,18 @@
   --dock-height: 4rem;
   --bevel-light: rgba(255, 255, 255, 0.75);
   --bevel-dark: rgba(0, 0, 0, 0.35);
+  --dock-font: "Pixelify Sans", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
 body {
   padding-bottom: var(--dock-height);
+}
+
+/* Fonte pixelada só nos blocos da doca (rodapé) e nas janelas
+   Música/Calendário/Rascunhos — não afeta o resto do site. */
+.dock,
+.dock-window {
+  font-family: var(--dock-font);
 }
 
 .dock {
@@ -129,7 +137,6 @@ body {
   background: var(--ld-accent);
   color: var(--ld-bg);
   border-bottom: 2px solid var(--bevel-dark);
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.04em;

@@ -16,7 +16,7 @@ Para um trabalho de Pós-graduação eu tinha configurado para um projeto de est
 
 `docker rm sonarqube`
 
-![image1.png](content/docs/2025/setembro/20/img/image1.png)
+![image1.png](image1.png)
 
 Agora posso executar o comando para subir um novo container:
 
@@ -25,7 +25,7 @@ Agora posso executar o comando para subir um novo container:
 > Sim, a versão é gratuíta, para aprendizado antes de sair pagando algo que não sabe usar.
 >
 
-![image2.png](content/docs/2025/setembro/20/img/image2.png)
+![image2.png](image2.png)
 
 ### **Opção 2: Substituir o container automaticamente**
 
@@ -60,11 +60,11 @@ Aqui a primeira parte de ajustar o docker então precisa se atentar a deixar ele
 
 Pronto! SonarQube rodando localmente.
 
-![image3.png](content/docs/2025/setembro/20/img/image3.png)
+![image3.png](image3.png)
 
 Ajuste as configurações de senha e segue para a página:
 
-![image.png](Configurando%20o%20SonarQube%20Localmente/image%203.png)
+![image4.png](image4.png)
 
 ### **Configuração do SonarQube**
 
@@ -110,7 +110,7 @@ sonar.login=SEU_TOKEN_AQUI
 
 ## **Problemas encontrados**
 
-![problema encontrado ao rodar o escaneamento 2025-09-20_09-24.png](Configurando%20o%20SonarQube%20Localmente/problema_encontrado_ao_rodar_o_escaneamento_2025-09-20_09-24.png)
+![problema encontrado ao rodar o escaneamento](problema-encontrado-ao-rodar-o-escaneamento-2025-09-20-09-24.png)
 
 ERROR: You're not authorized to run analysis. Please contact the project administrator.
 
@@ -122,6 +122,6 @@ O SonarScanner está tentando enviar os resultados da análise para o SonarQube,
 
 Agora pronto: quando executar o comando `sonar-scanner` vai executar o escaneamento no projeto e seguida mostrar em tela os resultados.
 
-![TERMINAL_SUCESS_2025-09-20_09-33.png](content/docs/2025/setembro/20/img/TERMINAL_SUCESS_2025-09-20_09-33.png)
+![terminal com sucesso](terminal-sucesso-2025-09-20-09-33.png)
 
-![EXECTUADO 2025-09-20_09-32.png](content/docs/2025/setembro/20/img/EXECTUADO_2025-09-20_09-32.png)
+![executado](executado-2025-09-20-09-32.png)

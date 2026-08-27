@@ -32,14 +32,7 @@
           </details>
         {{ end }}
 
-        <div class="ld-controls">
-          <div class="ld-view-toggle" role="tablist" aria-label="Modo de visualização">
-            <button type="button" class="ld-view-toggle__btn" data-view-btn="list" aria-pressed="true">Lista</button>
-            <button type="button" class="ld-view-toggle__btn" data-view-btn="grid" aria-pressed="false">Grade</button>
-          </div>
-        </div>
-
-        <div id="ld-post-list" class="ld-post-list" data-view="list">
+        <div class="ld-post-list">
           {{ range $groups }}
             {{ $first := index .Pages 0 }}
             {{ $gid := printf "%d-%02d" $first.Date.Year (int $first.Date.Month) }}
@@ -80,8 +73,4 @@
       </div>
     </aside>
   </div>
-
-  {{ with resources.Get "js/home.js" }}
-    <script src="{{ .RelPermalink }}" defer></script>
-  {{ end }}
 {{ end }}
