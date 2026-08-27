@@ -1,5 +1,8 @@
 # Hugo configuration file
-title: My Blog
+title: "Lady{de}bug"
+languageCode: pt-BR
+defaultContentLanguage: pt
+enableEmoji: true
 
 # import hextra as module
 module:
@@ -16,42 +19,42 @@ markup:
   highlight:
     noClasses: false
 
-  footer:
-    displayCopyright: false
-    displayPoweredBy: true
-
-  editURL: 
-    enable: true
-    base:  "https://github.com/kellen-xavier/ladydebug. github.io/edit/main/content"
-
-  # CSS custom
-  customCSS:
-    - css/custom.css
+outputs:
+  home: [HTML, RSS]
 
 menu:
   main:
-    - name: About
+    - name: Sobre
       pageRef: /about
-      weight: 2
-    - name: Contact ↗
+      weight: 1
+    - name: Contato ↗
       url: "https://ladydebug.keepo.bio/"
-      weight: 3
-    - name: Search
-      weight: 4
-      params:
-        type: search
+      weight: 2
     - name: GitHub
-      weight: 5
+      weight: 3
       url: "https://github.com/kellen-xavier"
       params:
         icon: github
-    - name: Twitter
-      weight: 6
-      url: "https://twitter.com/"
+    - name: Buscar
+      weight: 4
       params:
-        icon: x-twitter
+        type: search
+    - name: RSS
+      weight: 5
+      url: "/index.xml"
+      params:
+        icon: rss
+    - name: Tema
+      weight: 6
+      params:
+        type: theme-toggle
 
 params:
+  description: "Notas de estudo sobre qualidade de software, Linux e boas práticas de automação."
+
+  theme:
+    default: light
+
   navbar:
     displayTitle: true
     displayLogo: false
@@ -61,5 +64,4 @@ params:
     displayPoweredBy: true
 
   editURL:
-    enable: true
-    base: "https://github.com/imfing/hextra-starter-template/edit/main/content"
+    enable: false

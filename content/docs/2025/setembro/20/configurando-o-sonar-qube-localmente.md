@@ -2,6 +2,11 @@
 title: "Configurando o SonarQube Localmente"
 date: 2025-09-20
 weight: 1
+tags:
+  - sonarqube
+  - qualidade-de-codigo
+  - docker
+featured: true
 ---
 
 **Isso não é um tutorial,** é mais para o entendimento e estudo sobre a ferramenta e como aplicar ela em projetos pequenos, até médio porte, em repositórios fechados (código privado). Bom, como eu já tinha o SonarQube instalado na minha máquina, abaixo segue como configurar o Docker.

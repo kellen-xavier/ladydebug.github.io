@@ -1,0 +1,87 @@
+{{ define "main" }}
+  {{- $mesesPt := slice "Janeiro" "Fevereiro" "Março" "Abril" "Maio" "Junho" "Julho" "Agosto" "Setembro" "Outubro" "Novembro" "Dezembro" -}}
+  {{- $pages := where site.RegularPages "Type" "blog" -}}
+  {{- $featured := where $pages "Params.featured" true -}}
+  {{- $groups := $pages.GroupByDate "2006-01" -}}
+
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
+
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12 ld-home">
+
+        {{ if .Title }}<h1 class="hx:text-4xl hx:font-bold hx:tracking-tight ld-home__title">{{ .Title }}</h1>{{ end }}
+        <div class="ld-home__tagline">{{ .Content }}</div>
+
+        {{ if $featured }}
+          <details class="ld-highlights">
+            <summary>
+              <span>Destaques</span>
+            </summary>
+            <ul class="ld-highlights__list">
+              {{ range $featured }}
+                {{ $page := . }}
+                <li>
+                  <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+                  {{ with $page.Params.tags }}
+                    <div class="ld-post__tags">{{ partial "tags.html" (dict "context" $page) }}</div>
+                  {{ end }}
+                </li>
+              {{ end }}
+            </ul>
+          </details>
+        {{ end }}
+
+        <div class="ld-controls">
+          <div class="ld-view-toggle" role="tablist" aria-label="Modo de visualização">
+            <button type="button" class="ld-view-toggle__btn" data-view-btn="list" aria-pressed="true">Lista</button>
+            <button type="button" class="ld-view-toggle__btn" data-view-btn="grid" aria-pressed="false">Grade</button>
+          </div>
+        </div>
+
+        <div id="ld-post-list" class="ld-post-list" data-view="list">
+          {{ range $groups }}
+            {{ $first := index .Pages 0 }}
+            {{ $gid := printf "%d-%02d" $first.Date.Year (int $first.Date.Month) }}
+            {{ $label := printf "%d - %s" $first.Date.Year (index $mesesPt (sub (int $first.Date.Month) 1)) }}
+            <section class="ld-group" id="{{ $gid }}">
+              <h2 class="ld-group__title">{{ $label }}</h2>
+              <ul class="ld-group__items">
+                {{ range .Pages }}
+                  {{ $page := . }}
+                  <li class="ld-post">
+                    <a class="ld-post__link" href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+                    {{ with $page.Params.tags }}
+                      <div class="ld-post__tags">{{ partial "tags.html" (dict "context" $page) }}</div>
+                    {{ end }}
+                  </li>
+                {{ end }}
+              </ul>
+            </section>
+          {{ end }}
+        </div>
+
+      </main>
+    </article>
+
+    <aside class="hx:max-xl:hidden hx:w-64 hx:shrink-0 ld-aside">
+      <div class="ld-aside__inner">
+        <p class="ld-aside__title">Nesta página</p>
+        <nav>
+          <ul>
+            {{ range $groups }}
+              {{ $first := index .Pages 0 }}
+              {{ $gid := printf "%d-%02d" $first.Date.Year (int $first.Date.Month) }}
+              {{ $label := printf "%d - %s" $first.Date.Year (index $mesesPt (sub (int $first.Date.Month) 1)) }}
+              <li><a href="#{{ $gid }}">{{ $label }}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+
+  {{ with resources.Get "js/home.js" }}
+    <script src="{{ .RelPermalink }}" defer></script>
+  {{ end }}
+{{ end }}
