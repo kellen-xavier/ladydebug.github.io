@@ -105,47 +105,11 @@ body,
   text-decoration: underline;
 }
 
-/* Alternância Lista / Grade */
-.ld-controls {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0 0 1.5rem;
-}
-
-.ld-view-toggle {
-  display: inline-flex;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  border: 1px solid var(--ld-border);
-  border-radius: 999px;
-  background: var(--ld-bg-soft);
-}
-
-.ld-view-toggle__btn {
-  border: none;
-  background: transparent;
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  color: var(--ld-muted);
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.ld-view-toggle__btn[aria-pressed="true"] {
-  background: var(--ld-bg);
-  color: var(--ld-fg);
-  font-weight: 600;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-}
-
-.ld-view-toggle__btn:hover {
-  color: var(--ld-fg);
-}
-
 /* Lista de posts agrupada por mês */
+.ld-post-list {
+  margin-top: 1rem;
+}
+
 .ld-group {
   margin-bottom: 2.5rem;
 }
@@ -188,28 +152,6 @@ body,
 .ld-post__tags {
   margin-top: 0.25rem;
   font-size: 0.8rem;
-}
-
-/* Modo grade */
-.ld-post-list[data-view="grid"] .ld-group__items {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0.75rem;
-  list-style: none;
-  padding-left: 0;
-}
-
-.ld-post-list[data-view="grid"] .ld-post {
-  border: 1px solid var(--ld-border);
-  border-radius: 0.6rem;
-  padding: 0.85rem 1rem;
-  background: var(--ld-bg-soft);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.ld-post-list[data-view="grid"] .ld-post:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 /* Navegação "Nesta página" */
