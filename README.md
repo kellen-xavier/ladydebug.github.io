@@ -86,3 +86,9 @@ Pra trocar o link do Spotify ou adicionar um evento, é só editar os `.yaml`
 acima — não precisa mexer nos templates.
 
 Ícones: [Pixelarticons](https://github.com/halfmage/pixelarticons) (MIT).
+
+Fonte: [Pixelify Sans](https://fonts.google.com/specimen/Pixelify+Sans) (OFL,
+licença em `assets/font/pixelify-sans/OFL.txt`), self-hosted como WOFF2 —
+usada só dentro da doca e das janelas, não no resto do site. Emitida via
+`layouts/partials/custom/head-end.html` (não dá pra usar `url()` relativo
+direto no `desktop-dock.css`, que é um CSS puro, sem processamento de Hugo).

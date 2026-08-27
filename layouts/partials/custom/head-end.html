@@ -1,3 +1,30 @@
+{{/* Fonte "Pixelify Sans" (self-hosted, ver assets/font/pixelify-sans/) usada
+     só na doca (rodapé) e nas janelas Música/Calendário/Rascunhos. */}}
+{{ $regular := resources.Get "font/pixelify-sans/PixelifySans-Regular.woff2" }}
+{{ $bold := resources.Get "font/pixelify-sans/PixelifySans-Bold.woff2" }}
+{{ with $regular }}
+  {{ $regular = . | fingerprint }}
+  {{ $bold = $bold | fingerprint }}
+  <link rel="preload" href="{{ $regular.RelPermalink }}" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="{{ $bold.RelPermalink }}" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: "Pixelify Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("{{ $regular.RelPermalink }}") format("woff2");
+    }
+    @font-face {
+      font-family: "Pixelify Sans";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("{{ $bold.RelPermalink }}") format("woff2");
+    }
+  </style>
+{{ end }}
+
 {{ with resources.Get "css/desktop-dock.css" }}
   {{ $css := . | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
