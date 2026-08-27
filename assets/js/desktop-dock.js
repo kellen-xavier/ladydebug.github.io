@@ -3,18 +3,43 @@
   if (!dock) return;
 
   var openOffset = 0;
+  var topZ = 50;
 
-  function placeWindow(win) {
+  function navbarHeight() {
+    var nav = document.querySelector(".hextra-nav-container");
+    return nav ? nav.offsetHeight : 0;
+  }
+
+  function raiseWindow(win) {
+    topZ += 1;
+    win.style.zIndex = topZ;
+  }
+
+  function placeWindow(win, anchorBtn) {
     var margin = 16;
+    var gapAboveDock = 12;
+    var dockHeight = dock.offsetHeight;
     var width = win.offsetWidth || 352;
     var height = win.offsetHeight || 280;
+
+    // Ancora perto do ícone clicado, horizontalmente; verticalmente sempre
+    // colada acima da doca (nunca perto do cabeçalho).
+    var left = margin + openOffset;
+    if (anchorBtn) {
+      var rect = anchorBtn.getBoundingClientRect();
+      left = rect.left + rect.width / 2 - width / 2 + openOffset;
+    }
+    var top = window.innerHeight - dockHeight - gapAboveDock - height - openOffset;
+
     var maxLeft = window.innerWidth - width - margin;
-    var maxTop = window.innerHeight - height - margin;
-    var left = Math.min(maxLeft, margin + openOffset);
-    var top = Math.min(maxTop, margin + openOffset);
-    win.style.left = Math.max(margin, left) + "px";
-    win.style.top = Math.max(margin, top) + "px";
-    openOffset = (openOffset + 24) % 96;
+    var maxTop = window.innerHeight - dockHeight - gapAboveDock - height;
+    var minTop = navbarHeight() + margin;
+    left = Math.min(maxLeft, Math.max(margin, left));
+    top = Math.min(maxTop, Math.max(minTop, top));
+
+    win.style.left = left + "px";
+    win.style.top = top + "px";
+    openOffset = (openOffset + 40) % 120;
   }
 
   function loadEmbed(win) {
@@ -28,11 +53,12 @@
     body.dataset.loaded = "true";
   }
 
-  function openWindow(win) {
+  function openWindow(win, anchorBtn) {
     if (win.open) return;
     win.show();
-    placeWindow(win);
     loadEmbed(win);
+    placeWindow(win, anchorBtn);
+    raiseWindow(win);
   }
 
   function closeWindow(win) {
@@ -49,7 +75,7 @@
       closeWindow(win);
       btn.setAttribute("aria-pressed", "false");
     } else {
-      openWindow(win);
+      openWindow(win, btn);
       btn.setAttribute("aria-pressed", "true");
     }
   });
@@ -61,6 +87,10 @@
 
     win.addEventListener("close", function () {
       if (btn) btn.setAttribute("aria-pressed", "false");
+    });
+
+    win.addEventListener("pointerdown", function () {
+      raiseWindow(win);
     });
 
     var closeBtn = win.querySelector("[data-dock-close]");
@@ -92,10 +122,11 @@
 
     bar.addEventListener("pointermove", function (event) {
       if (!dragging) return;
+      var minTop = navbarHeight();
       var left = startLeft + (event.clientX - startX);
       var top = startTop + (event.clientY - startY);
       win.style.left = Math.max(0, left) + "px";
-      win.style.top = Math.max(0, top) + "px";
+      win.style.top = Math.max(minTop, top) + "px";
     });
 
     function stopDrag(event) {

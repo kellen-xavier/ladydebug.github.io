@@ -54,6 +54,10 @@ params:
 
   theme:
     default: light
+    # O toggle de tema já vive no menu (item "Tema", type: theme-toggle).
+    # Isso desliga só as instâncias extras que o Hextra mostra sozinho
+    # (rodapé / fundo da sidebar) quando a sidebar esquerda está oculta.
+    displayToggle: false
 
   navbar:
     displayTitle: true
@@ -61,7 +65,7 @@ params:
 
   footer:
     displayCopyright: false
-    displayPoweredBy: true
+    displayPoweredBy: false
 
   editURL:
     enable: false
