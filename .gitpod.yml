@@ -10,6 +10,10 @@ tasks:
     init: echo "Your version of Hugo is `hugo version`" && hugo mod tidy
     command: hugo server -D -F --baseURL $(gp url 1313) --liveReloadPort=443 --appendPort=false --bind=0.0.0.0 --disableFastRender
 
+  - name: Lint (mdl)
+    init: bundle install
+    command: bundle exec mdl content README.md
+
 ports:
   - port: 1313
     onOpen: open-preview
