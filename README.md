@@ -22,3 +22,29 @@ hugo mod tidy
 hugo server -D -F
 
 ```
+
+## Lint de Markdown
+
+Os posts são checados com o [`mdl`](https://github.com/markdownlint/markdownlint) (regras em
+`.mdl_style.rb`). Roda automaticamente em todo PR e push para `develop`/`main`
+(`.github/workflows/lint.yaml`); para rodar localmente:
+
+```bash
+bundle install
+bundle exec mdl content README.md
+```
+
+## Changelog e releases
+
+O `CHANGELOG.md` (formato [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)) é gerado
+automaticamente pelo [`git-cliff`](https://git-cliff.org/) a partir dos commits em
+[Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, ...). Não é para
+editar esse arquivo manualmente.
+
+Quando `develop` é mergeada em `main`, o workflow `.github/workflows/release.yaml`:
+
+1. calcula a próxima versão a partir dos commits desde a última tag;
+2. atualiza o `CHANGELOG.md` e commita em `main`;
+3. cria a tag `vX.Y.Z` e publica a GitHub Release com as notas dessa versão.
+
+Se não houver commit relevante (`feat`/`fix`/...) desde a última tag, nada é publicado.

@@ -2,12 +2,7 @@
 title: Cypress e Boas Práticas de Automação
 date: '2024-10-24T13:07:00-03:00'
 slug: cypress-e-boas-praticas-de-automacao
-tags:
-- cypress
-- automacao
-- boas
-- praticas
-- docs
+tags: [cypress, automacao, boas, praticas, docs]
 draft: false
 featured: true
 ---
