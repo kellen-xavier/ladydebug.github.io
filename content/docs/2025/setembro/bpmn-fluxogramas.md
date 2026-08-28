@@ -35,10 +35,13 @@ Start inicia o fluxo, intermediate acontece no meio, boundary fica colado numa a
 - Disparam quando ocorre algo **durante** a atividade.
 - **Interrupting (borda contínua):** cancela a atividade e desvia o fluxo.
 - **Non-interrupting (borda tracejada):** cria um fluxo alternativo sem cancelar.
+
 - Tipos comuns: **Timer, Message, Conditional, Signal, Escalation, Compensation**.
-  - Especiais:
-    - **Error boundary:** só interruptivo; captura erros do subprocesso.
-      - **Cancel boundary:** só em **Transaction subprocess**.
+
+- Especiais:
+  - **Error boundary:** só interruptivo; captura erros do subprocesso.
+  - **Cancel boundary:** só em **Transaction subprocess**.
+  
 - As variações **(non-interrupting)** mantêm a atividade rodando.
 
 ## End events (encerram o caminho)
