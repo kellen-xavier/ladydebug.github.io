@@ -38,7 +38,7 @@ Start inicia o fluxo, intermediate acontece no meio, boundary fica colado numa a
 - Tipos comuns: **Timer, Message, Conditional, Signal, Escalation, Compensation**.
   - Especiais:
     - **Error boundary:** só interruptivo; captura erros do subprocesso.
-    - **Cancel boundary:** só em **Transaction subprocess**.
+      - **Cancel boundary:** só em **Transaction subprocess**.
 - As variações **(non-interrupting)** mantêm a atividade rodando.
 
 ## End events (encerram o caminho)
