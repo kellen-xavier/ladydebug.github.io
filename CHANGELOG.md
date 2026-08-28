@@ -5,6 +5,21 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.3.0] - 2026-08-28
+
+### Added
+
+- Import posts the old blog notion database ([3dbcb50](https://github.com/kellen-xavier/ladydebug.github.io/commit/3dbcb50ffca18b363fd9b86f841afbadc2ff2145))
+- Add logotipo blog ([fed706f](https://github.com/kellen-xavier/ladydebug.github.io/commit/fed706fab418269bab2785e864fa0269af8902b8))
+- Add about this blog ([e60357b](https://github.com/kellen-xavier/ladydebug.github.io/commit/e60357b46985c9907e0d5bffa1a348b61dfb2d98))
+
+### Fixed
+
+- Linter markdown ([c273ec4](https://github.com/kellen-xavier/ladydebug.github.io/commit/c273ec4d22f691d789002706bb6c74d671179bb6))
+- Add + link and fix text ([ee60b1b](https://github.com/kellen-xavier/ladydebug.github.io/commit/ee60b1b8f3d0c540e7e9a7a6d98b15fca09e38bd))
+- Violation rule MD007 ([1d521ee](https://github.com/kellen-xavier/ladydebug.github.io/commit/1d521ee89cdbb69b9e9749f66b69d44a79c23f85))
+- Violation rule MD007 again ([e6dd865](https://github.com/kellen-xavier/ladydebug.github.io/commit/e6dd8651e565a23e4163f6706305937ab32bd6a7))
+- Violation rule MD007 again 2 ([9d44016](https://github.com/kellen-xavier/ladydebug.github.io/commit/9d4401659d83cafb1e250422b165074ba2eca99e))
 ## [0.2.0] - 2026-08-27
 
 ### Added
@@ -51,5 +66,6 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 - Caminho da page principal ([9f5b8a0](https://github.com/kellen-xavier/ladydebug.github.io/commit/9f5b8a0552465794c211bf5fea064f2015440d14))
 - Janelas da doca coladas na navbar, botão fechar, e limpa rodapé duplicado ([38e09eb](https://github.com/kellen-xavier/ladydebug.github.io/commit/38e09eb067e06f43b0502571c1990cada91ab555))
+[0.3.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.1.0...v0.2.0
 
