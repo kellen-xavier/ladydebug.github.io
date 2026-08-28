@@ -15,4 +15,5 @@ Este blog não é um tutorial supremo ou fonte da verdade, sempre vou citar as r
 Fique a vontade de abrir uma [Issues aqui](https://github.com/kellen-xavier/ladydebug.github.io/issues) e citar algum erro.
 
 Fique a vontade para copiar o template como referência.
-Segue minhas inspitações de blogs: [tecnologia](https://akitaonrails.com/) e [blog que eu lia quando tinha 15 anos](https://www.depoisdosquinze.com/)
+Segue meus incentivos de blogs: [tecnologia](https://akitaonrails.com/) e [blog que eu lia quando tinha 15 anos](https://www.depoisdosquinze.com/) onde acompanho a algum tempo e ocorreu a vontade (e necessidade) de criar o meu.
+O template que peguei pode ser encontrado [aqui](https://themes.gohugo.io/)
