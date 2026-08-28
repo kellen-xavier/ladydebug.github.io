@@ -8,7 +8,7 @@ draft: false
 
 Seguindo a **saga de estudos em Terminais/TUIs**, aqui vamos para o entendimento sobre o CRUSH em uma máquina Windows: como foi que configurei e como está sendo o uso até o momento, realizando um teste com um repositório open source bem simples, voltado à configuração de ambiente de desenvolvimento no Windows.
 
-**Objetivo principal**
+### Objetivo principal
 
 Permitir que desenvolvedores tenham **assistência de IA diretamente no terminal**, sem precisar alternar para um editor web ou **IDE com plugins integrados** — ou melhor, mais leve ao executar, por exemplo, do que o VS Code. O que a ferramenta oferece:
 
@@ -30,7 +30,7 @@ Permitir que desenvolvedores tenham **assistência de IA diretamente no terminal
 
 **Instalação**: via PowerShell optei por seguir o comando
 
-```
+```text
 # NPM
 npm install -g @charmland/crush
 ```
@@ -96,29 +96,36 @@ Repositório de scripts voltado para Windows: instalar e personalizar via Shell 
 - Verificação de Código de Saída (uso de $LASTEXITCODE para validar sucesso das operações winget)
 - Feedback Visual ao Usuário (uso de Write-Host com cores para indicar status das operações)
 - Todos os scripts principais possuem verificação de permissões administrativas no início
+```
 
 ## Liste exemplos comuns de software
 
 ### Trabalho uso VPNs
+
 - VPN: Netskope Client
 
 ### Aplicativos
+
 Android Studio, BlueStacks 5, Bitwarden, Cursor, Docker Desktop, DBeaver Community, Discord, Flameshot, Global VPN Cliente, LibreOffice, Powershell, PowerToys Awake, Intellij IDEA Community Edition, ScreenToGif, sqldeveloper, Sublime Text Free, Teams, Insomnia, Obsidian, VS Code, Visual Studio Installer, Logitech G Hub
 
 ### Navegadores
+
 Google Chrome, Edge, Firefox, Opera
 
 ### Linguagens Desenvolvimento
+
 - JAVA 11, 17, 18+
 - NodeJS
 - Python
 
 ## Documentação README.md
+
 - Especifica versão mínima do Windows 10 (requer 1809+ para winget)
 - Necessidade do App Installer atualizado
 - Seção de troubleshooting
 
 ### Registry com Backup
+
 ```shell
 $BackupPath = "$PSScriptRoot\backup\registry-$(Get-Date -Format 'yyyyMMdd-HHmmss').reg"
 reg export "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" $BackupPath
@@ -138,7 +145,6 @@ reg export "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" $
 - [PSScriptAnalyzer](https://github.com/PowerShell/PSScriptAnalyzer)
 - [The test framework for Powershell](https://pester.dev/)
 - [Starting Windows PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.4#with-administrative-privileges-run-as-administrator)
-```
 
 Tentei por tudo o que entendi ser o correto desta vez para criar o setup, eu tive que ler as referências também para entender as boas práticas em torno disso, importante entender exatamente como vai montar o arquivo do AGENT pois ele fica mais estruturado.
 

@@ -16,17 +16,17 @@ Eu gosto da metáfora de dirigir um carro, por exemplo: eu imagino como se tu es
 
 ## Alguns Conceitos Base Importantes
 
-**O que é um terminal**
+### O que é um terminal
 
 Um terminal é uma interface de texto para interação direta com o sistema operacional. Ele envia comandos ao shell (ex.: Bash, Zsh, PowerShell), que interpreta e executa instruções usando as APIs do sistema.
 
-**Fontes sobre Terminais - Lista de leituras e vídeos**
+### Fontes sobre Terminais - Lista de leituras e vídeos
 
 [Wikipédia](https://pt.wikipedia.org/wiki/Terminal_(inform%C3%A1tica))
 [[Akitando] #70 - Entendendo GIT | (não é um tutorial!)](https://akitaonrails.com/2020/02/05/akitando-70-entendendo-git-nao-e-um-tutorial/)
 [[Akitando] #71 - Usando Git Direito | Limpando seus Commits!](https://akitaonrails.com/2020/02/12/akitando-71-usando-git-direito-limpando-seus-commits/)
 
-**Sistema de arquivos e navegação**
+### Sistema de arquivos e navegação
 
 Quando de modo geral, vamos navegar em um terminal, ou seja, entrar e sair de pastas manipular arquivos, é igual como se fosse navegar em uma tela, mas aqui é por comandos. Quando aqui a gente dizer "faça tal coisa no repositório projeto/automação" estamos comentando que é dentro da pasta em questão.
 
@@ -36,17 +36,17 @@ Visualmente temos, uma tela e onde precisa navegar. Quando abri o terminal (exem
 
 Exemplo abaixo uma pasta qualquer, aí tenho que ir só que agora via terminal: se por acaso (a grande maioria abrir o terminal) vai ser algo parecido assim:
 
-```
+```text
 PS C:\Users\kellen.xavier>
 ```
 
 Então vem os comandos para navegar até ele.
 
-**Comandos geralmente mais utilizados**
+### Comandos geralmente mais utilizados
 
 Navegação:
 
-```
+```text
 pwd        # mostra o diretório atual
 ls         # lista arquivos e pastas
 ls -la     # lista detalhada (inclui ocultos)
@@ -73,27 +73,27 @@ Segue abaixo uma sequência de comandos para utilizar, quando se (e principalmen
 
 ![PC pegando fogo](pc-fire.png)
 
-1. **Para fazer um merge da sua branch atual para a branch principal ("main"), você pode seguir esses passos:**
+**Para fazer um merge da sua branch atual para a branch principal ("main"), você pode seguir esses passos:**
 
 ```bash
 git checkout sua-branch
-$ git fetch origin	# Puxa as últimas informações do repositório remoto
+$ git fetch origin # Puxa as últimas informações do repositório remoto
 $ git rebase origin/main
 # Atualiza sua branch com as alterações da branch main
 
 $ git rebase origin/main   # Atualiza sua branch com as alterações da branch main
 ```
 
-2. **Depois de ter sua branch (de desenvolvimento) atualizada, execute o comando git checkout para mudar para a branch "develop" (ou main):**
+**Depois de ter sua branch (de desenvolvimento) atualizada, execute o comando git checkout para mudar para a branch "develop" (ou main):**
 
 ```bash
-$ git checkout develop
+git checkout develop
 ```
 
-3. **Agora você está na branch "develop". Realize o merge da sua branch de desenvolvimento usando o seguinte comando:**
+**Agora você está na branch "develop". Realize o merge da sua branch de desenvolvimento usando o seguinte comando:**
 
 ```bash
-$ git merge sua-branch
+git merge sua-branch
 ```
 
 ---
@@ -109,7 +109,7 @@ O objetivo de criar um Pull Request (PR) no GitHub (ou em outras plataformas de 
 **Dado isso, segue o comando git:**
 
 ```bash
-$ git checkout -b minha-branch origin/minha-branch-remota-desejada
+git checkout -b minha-branch origin/minha-branch-remota-desejada
 ```
 
 Isso irá criar uma nova branch local chamada `minha-branch` baseada na branch remota `origin/minha-branch-remota-desejada`.
@@ -123,7 +123,7 @@ Com esse comando, pode-se trabalhar com a **branch localmente**, e fazer commits
 Antes de tudo, quando for iniciar o desenvolvimento no projeto, atualize seu ambiente local com o seu repositório remoto.
 
 ```bash
-$ git pull
+git pull
 ```
 
 Ao fazer isso, seu ambiente local se atualiza com as demais alterações feitas pelos colaboradores do projeto em que estão envolvidos.
@@ -133,31 +133,31 @@ O comando git pull é usado para buscar (`fetch`) as alterações mais recentes 
 Outro exemplo de git pull:
 
 ```bash
-$ git pull <remote> <branch>
+git pull <remote> <branch>
 ```
 
 Onde `<remote>` é o nome do repositório remoto de onde você deseja puxar as alterações (geralmente "`origin`") e `<branch>` é a branch remota da qual você deseja puxar as alterações (por exemplo, "`main`", "`develop`", etc.).
 
-### Alterações feitas:
+### Alterações feitas
 
 Para enviar suas alterações para o repositório remoto, é preciso adicionar, seguindo de um comentário do que foi feito.
 
 Adicionar alteração:
 
 ```bash
-$ git add .
+git add .
 ```
 
 ⚠️ Cuidado ao utilizar o `git add .` pois ele vai adicionar todas alterações realizadas. E isso precisa de atenção. Evite usar, recomenda-se utilizar o:
 
 ```bash
-$ git add nome-do-arquivo-ou-pasta
+git add nome-do-arquivo-ou-pasta
 ```
 
 Após realizar faça o comentário:
 
 ```bash
-$ git commit -m "padrao-de-commit: minha mensagem"
+git commit -m "padrao-de-commit: minha mensagem"
 ```
 
 **Leia aqui (por link depois) para saber mais sobre padrões de commits.**
@@ -165,13 +165,13 @@ $ git commit -m "padrao-de-commit: minha mensagem"
 Agora, analise o seu terminal, se caso não tiver nenhum erro ou conflito, pode seguir para subir as alterações:
 
 ```bash
-$ git push
+git push
 ```
 
 Para mesclar sua branch com a `main` no repositório, faça:
 
 ```bash
-$ git merge sua-branch
+git merge sua-branch
 ```
 
 ---
@@ -185,7 +185,7 @@ Aqui estão alguns exemplos de como você pode usar o `git stash`:
 **Armazenar Alterações Temporariamente:** se você fez algumas alterações no seu diretório de trabalho, mas ainda não deseja commitá-las, você pode usar o seguinte comando para armazená-las temporariamente:
 
 ```bash
-$ git stash save "Descrição opcional"
+git stash save "Descrição opcional"
 ```
 
 A descrição é opcional e pode ajudar a identificar por que você armazenou essas alterações.
@@ -193,7 +193,7 @@ A descrição é opcional e pode ajudar a identificar por que você armazenou es
 **Listar Stashes:** você pode listar os stashes que você criou usando o seguinte comando:
 
 ```bash
-$ git stash list
+git stash list
 ```
 
 **Aplicar Stash:** para aplicar o stash mais recente (ou um `stash` específico), você pode usar:
@@ -206,14 +206,14 @@ git stash apply stash@{n} # Aplica um stash específico pelo seu índice
 **Remover Stash:** depois de aplicar um stash, você pode removê-lo:
 
 ```bash
-$ git stash drop           # Remove o stash mais recente
-$ git stash drop stash@{n} # Remove um stash específico pelo seu índice
+git stash drop           # Remove o stash mais recente
+git stash drop stash@{n} # Remove um stash específico pelo seu índice
 ```
 
 **Criar uma Nova Branch a partir do Stash:** se você quiser criar uma nova branch baseada em um stash, pode usar:
 
 ```bash
-$ git stash branch nova-branch  # Cria uma nova branch e aplica o stash nela
+git stash branch nova-branch  # Cria uma nova branch e aplica o stash nela
 ```
 
 ---
@@ -223,9 +223,9 @@ $ git stash branch nova-branch  # Cria uma nova branch e aplica o stash nela
 Atualize sua **branch** com **as últimas alterações da branch principal** ("main"). Isso ajudará a **evitar conflitos durante o merge**. Execute os seguintes comandos:
 
 ```bash
-$ git fetch origin	# Puxa as últimas informações do repositório remoto
+git fetch origin # Puxa as últimas informações do repositório remoto
 
-$ git rebase origin/main   # Atualiza sua branch com as alterações da branch main
+git rebase origin/main   # Atualiza sua branch com as alterações da branch main
 ```
 
 ⚠️ **Atenção**

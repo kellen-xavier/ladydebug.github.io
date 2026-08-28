@@ -87,7 +87,7 @@ Todas as 16 correções foram implementadas, testadas no navegador (Playwright/C
 
 Link do PR: <https://github.com/kellen-xavier/page-studio-ghibli/pull/1>
 
-**Resultado**
+### Resultado
 
 Consideravelmente bem mais rápido.
 

@@ -8,7 +8,7 @@ draft: true
 
 Trabalho - Pós-graduação | Projeto e Arquitetura de Software
 
-### Neste módulo, foram apresentados alguns princípios de design e umas implicações na manutenção e evolução de software. Quais desses princípios discutidos vocês já usam? Identifique os benefícios e dificuldades dessas adoções.
+### Neste módulo, foram apresentados alguns princípios de design e umas implicações na manutenção e evolução de software. Quais desses princípios discutidos vocês já usam? Identifique os benefícios e dificuldades dessas adoções
 
 ---
 
@@ -22,7 +22,7 @@ Compartilho ferramentas e *plugins* para IDEs, analiso processos básicos. Segue
 
 Já apliquei testes de API, que acredito que estejam agora voltados à "**Observabilidade**", que seria **a capacidade de entender o que está acontecendo dentro de um sistema apenas com base em sua saída externa**. Geralmente, nas análises, faço um plano de testes e levantamento de cenários de testes. Compartilho com o time para que sejam aplicados os testes. Com base nisso, por exemplo, na API, utilizei a ferramenta do K6 (<https://k6.io/>) e o Grafana (<https://grafana.com/docs/k6/latest/>). Assim, era criada a automação com base nos cenários, executávamos os testes, e isso era validado dentro de uma *pipeline*, no próprio GitHub Actions.
 
-**Exemplo com K6**
+### Exemplo com K6
 
 ```javascript
 import http from 'k6/http';
@@ -78,7 +78,7 @@ Hoje em dia, usar linters facilita bastante, pois evita essa "reação em cadeia
 
 ---
 
-**Fontes de Estudos - Pesquisa**
+### Fontes de Estudos - Pesquisa
 
 **Livros:**
 

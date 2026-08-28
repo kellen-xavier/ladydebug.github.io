@@ -36,4 +36,4 @@ Esses não são padrões formais, mas **categorias de uso**.
 
 ---
 
-**Referências**
+### Referências

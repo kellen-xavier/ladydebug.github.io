@@ -30,7 +30,7 @@ Com base nisso, organizei todas as informações que tinha em mãos e conversei 
 
 Utilizei também o ChatGPT para estruturar de forma detalhada e organizar todas as informações nos devidos lugares, a fim de não perder o foco nos detalhes.
 
-**ChatGPT**
+### ChatGPT
 
 ![Uso do ChatGPT para organizar as informações](chatgpt-1.png)
 

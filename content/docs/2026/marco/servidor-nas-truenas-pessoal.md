@@ -16,7 +16,7 @@ Documentação técnica: servidor pessoal, aplicando um projeto — implantaçã
 
 ## Arquitetura Final do Ambiente
 
-```
+```text
 Internet
 │
 Modem/Router (seu modem)

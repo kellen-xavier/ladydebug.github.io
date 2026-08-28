@@ -54,6 +54,13 @@ bundle install
 bundle exec mdl content README.md
 ```
 
+O `mdl` só aponta os problemas, não corrige. Pra corrigir automaticamente o que dá pra
+corrigir sem risco (ver `scripts/fix_markdown.rb` pra saber exatamente o quê):
+
+```bash
+bundle exec ruby scripts/fix_markdown.rb
+```
+
 ## Changelog e releases
 
 O `CHANGELOG.md` (formato [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)) é gerado

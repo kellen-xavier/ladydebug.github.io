@@ -6,7 +6,7 @@ tags: [xp, metodologias-ageis]
 draft: true
 ---
 
-**Tentando praticar o XP**
+### Tentando praticar o XP
 
 ![Estudando XP na prática 1](xp-1.png)
 
