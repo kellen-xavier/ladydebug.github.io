@@ -14,3 +14,9 @@ exclude_rule "MD033" # inline HTML
 # Prefere numeração sequencial (1. 2. 3.) em vez do padrão do mdl (1. 1. 1.).
 rule "MD029", :style => :ordered
 
+# Título em forma de pergunta é conteúdo legítimo em pt-BR (ex.: "O que é
+# Dev Teste?") — o padrão do mdl inclui "?" como pontuação de título a
+# evitar, o que soaria estranho removido. Mantém apenas ".,;:!" como
+# pontuação acidental de fato.
+rule "MD026", :punctuation => ".,;:!"
+
