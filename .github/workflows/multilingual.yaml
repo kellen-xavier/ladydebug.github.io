@@ -1,0 +1,31 @@
+name: Multilingual tests
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+
+jobs:
+  multilingual:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.147.9
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Install Hugo
+        run: |
+          wget -O "${{ runner.temp }}/hugo.deb" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+
+      - name: Test native multilingual behavior
+        run: bundle exec ruby scripts/test_multilingual.rb

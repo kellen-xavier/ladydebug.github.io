@@ -10,6 +10,20 @@ Programming and Quality. This is not a tutorials. This is my daily study, buildi
 Well ok. Where from this idea? Good, this ideia emerge from the book The Programatic Programmer.
 Specifically, of the chapter one [get to know the book here](https://www.amazon.com.br/Programador-Pragm%C3%A1tico-Aprendiz-Mestre/dp/8577807002).
 
+## Run this Project
+
+Preview with:
+
+`hugo server -D -F`
+
+Use the language button to select English. Hugo connects the matching files automatically; it does not translate the text for you.
+
+Before publishing, run:
+
+bundle exec ruby scripts/test_multilingual.rb
+bundle exec mdl content README.md
+hugo --gc --minify
+
 ## Testando localmente
 
 **Pré-requisitos:** [Hugo extended](https://gohugo.io/installation/) `0.147.9`+
@@ -73,6 +87,47 @@ corrigir sem risco (ver `scripts/fix_markdown.rb` pra saber exatamente o quê):
 ```bash
 bundle exec ruby scripts/fix_markdown.rb
 ```
+
+## Português e inglês com o seletor nativo
+
+O blog usa o modo multilíngue do Hugo e o seletor de idioma do tema Hextra.
+O botão de idioma no cabeçalho abre as opções **Português** e **English**.
+As páginas em português mantêm suas URLs; as versões em inglês ficam em `/en/`.
+Menus, busca, RSS e os textos da página inicial acompanham o idioma selecionado.
+
+O seletor abre a tradução do post atual. Quando ela ainda não existe, o tema
+leva à página inicial do idioma escolhido. A troca funciona localmente e não
+depende de um serviço externo de tradução.
+
+As traduções são arquivos Markdown separados, com o mesmo nome e o sufixo `.en`:
+
+```text
+content/docs/2026/outubro/meu-post.md
+content/docs/2026/outubro/meu-post.en.md
+
+content/docs/2026/julho/meu-projeto/index.md
+content/docs/2026/julho/meu-projeto/index.en.md
+```
+
+Traduza o título e o conteúdo, preservando data, slug e estado de rascunho.
+Em page bundles, o Hugo compartilha as imagens entre as traduções. Em posts
+soltos com imagens externas ao bundle, use caminhos que resolvam também em `/en/`.
+Os posts publicados já têm versões em inglês; rascunhos continuam como estão.
+Novos posts precisam de uma versão `.en.md` antes de serem publicados.
+
+### Testes do modo multilíngue
+
+Com os mesmos pré-requisitos do blog, execute:
+
+```bash
+bundle exec ruby scripts/test_multilingual.rb
+```
+
+Os testes geram um site temporário e verificam o seletor nativo, a troca entre
+posts equivalentes, o fallback sem tradução, URLs em subdiretórios, textos
+localizados e imagens compartilhadas. Também verificam se cada post publicado
+tem um arquivo em inglês. O workflow `multilingual.yaml` executa os testes nos
+PRs e pushes para `develop` e `main`.
 
 ## Changelog e releases
 

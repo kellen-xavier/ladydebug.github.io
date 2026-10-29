@@ -191,3 +191,14 @@ body,
 .ld-aside nav a:hover {
   color: var(--ld-accent);
 }
+
+/* Keep room for Hextra's native language switcher on narrow screens. */
+@media (max-width: 640px) {
+  .ld-navbar-brand {
+    flex-shrink: 0;
+  }
+
+  .ld-navbar-brand > span {
+    display: none;
+  }
+}

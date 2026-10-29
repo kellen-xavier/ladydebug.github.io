@@ -2,35 +2,37 @@
      "panel" (spotify | events | drafts) tem seu próprio corpo abaixo. */}}
 {{- $today := now.Format "2006-01-02" -}}
 
-<nav class="dock" role="toolbar" aria-label="Painéis do site">
+<nav class="dock" role="toolbar" aria-label="{{ i18n `dockPanels` }}">
   {{- range site.Data.dock }}
     {{- $icon := resources.Get (printf "image/icons/pixelarticons-%s.svg" .icon) }}
     <button
       type="button"
       class="dock__item"
       data-dock-target="dock-window-{{ .id }}"
+      aria-label="{{ i18n (printf `dock%s` (.id | title)) }}"
       aria-haspopup="dialog"
       aria-pressed="false"
     >
       {{- with $icon }}{{ .Content | safeHTML }}{{ end }}
-      <span class="dock__label">{{ .label }}</span>
+      <span class="dock__label">{{ i18n (printf "dock%s" (.id | title)) }}</span>
     </button>
   {{- end }}
 </nav>
 
 {{- range site.Data.dock }}
   {{- $item := . }}
-  <dialog id="dock-window-{{ .id }}" class="dock-window" aria-label="{{ .label }}">
+  {{- $label := i18n (printf "dock%s" (.id | title)) }}
+  <dialog id="dock-window-{{ .id }}" class="dock-window" aria-label="{{ $label }}">
     <header class="dock-window__bar">
-      <span>{{ .label }}</span>
-      <button type="button" class="dock-window__close" data-dock-close aria-label="Fechar">×</button>
+      <span>{{ $label }}</span>
+      <button type="button" class="dock-window__close" data-dock-close aria-label="{{ i18n `dockClose` }}">×</button>
     </header>
 
     {{- if eq .panel "spotify" }}
       <div class="dock-window__body dock-window__embed">
         <div data-embed-src="{{ replace .spotify_url `open.spotify.com/` `open.spotify.com/embed/` }}"></div>
         <a class="dock-window__spotify-link" href="{{ .spotify_url }}" target="_blank" rel="noreferrer">
-          Abrir no Spotify ↗
+          {{ i18n "dockSpotify" }}
         </a>
       </div>
 
@@ -51,7 +53,7 @@
             {{- end }}
           </ul>
         {{- else }}
-          <p class="dock-window__empty">Nenhum evento no momento.</p>
+          <p class="dock-window__empty">{{ i18n "dockNoEvents" }}</p>
         {{- end }}
       </div>
 
@@ -69,7 +71,7 @@
             {{- end }}
           </ul>
         {{- else }}
-          <p class="dock-window__empty">Nenhum rascunho no momento.</p>
+          <p class="dock-window__empty">{{ i18n "dockNoDrafts" }}</p>
         {{- end }}
       </div>
     {{- end }}

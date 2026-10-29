@@ -3,7 +3,50 @@ baseURL: "https://ladydebug.com.br/"
 title: "Lady{de}bug"
 languageCode: pt-BR
 defaultContentLanguage: pt
+defaultContentLanguageInSubdir: false
 enableEmoji: true
+
+languages:
+  pt:
+    languageName: Português
+    languageCode: pt-BR
+    weight: 1
+  en:
+    languageName: English
+    languageCode: en-US
+    weight: 2
+    params:
+      description: "Study notes on software quality, Linux, and automation best practices."
+    menu:
+      main:
+        - name: About
+          pageRef: /about
+          weight: 1
+        - name: Contact ↗
+          url: "https://ladydebug.keepo.bio/"
+          weight: 2
+        - name: GitHub
+          url: "https://github.com/kellen-xavier"
+          weight: 3
+          params:
+            icon: github
+        - name: Search
+          weight: 4
+          params:
+            type: search
+        - name: RSS
+          url: "/en/index.xml"
+          weight: 5
+          params:
+            icon: rss
+        - name: Language
+          weight: 6
+          params:
+            type: language-switch
+        - name: Theme
+          weight: 7
+          params:
+            type: theme-toggle
 
 # import hextra as module
 module:
@@ -45,8 +88,12 @@ menu:
       url: "/index.xml"
       params:
         icon: rss
-    - name: Tema
+    - name: Idioma
       weight: 6
+      params:
+        type: language-switch
+    - name: Tema
+      weight: 7
       params:
         type: theme-toggle
 
