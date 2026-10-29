@@ -1,4 +1,5 @@
 # Hugo configuration file
+baseURL: "https://ladydebug.com.br/"
 title: "Lady{de}bug"
 languageCode: pt-BR
 defaultContentLanguage: pt

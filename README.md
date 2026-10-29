@@ -43,6 +43,19 @@ de produção igual ao do CI, pra pegar erro de template que só aparece com
 hugo --gc --minify
 ```
 
+## Criando um post novo
+
+```bash
+ruby scripts/new_post.rb "Título do post" "tag1, tag2"
+```
+
+Gera `content/docs/<ano>/<mês em português>/<slug>.md` (criando as pastas de
+ano/mês se ainda não existirem) com o front matter já preenchido — `title`,
+`date` (data de hoje), `slug` (gerado a partir do título) e `tags` — e
+`draft: true`. Título e tags também podem ser omitidos na chamada: o script
+pergunta interativamente. Quando o post estiver pronto pra publicar, troque
+`draft: true` para `draft: false` manualmente.
+
 ## Lint de Markdown
 
 Os posts são checados com o [`mdl`](https://github.com/markdownlint/markdownlint) (regras em
