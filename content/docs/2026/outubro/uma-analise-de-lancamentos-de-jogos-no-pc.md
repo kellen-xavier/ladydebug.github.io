@@ -1,7 +1,7 @@
 ---
 title: "Uma análise de lançamentos de jogos no PC"
 date: 2026-10-29T15:53:10-03:00
-draft: true
+draft: false
 ---
 
 Exemplos simples mas cruciais de testes no seu projeto;
