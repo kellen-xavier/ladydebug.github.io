@@ -5,6 +5,21 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.4.0] - 2026-10-29
+
+### Added
+
+- Add script new post automatic ([8a2fe5d](https://github.com/kellen-xavier/ladydebug.github.io/commit/8a2fe5db9e5c3eff7ab06f3c7acbfa6b61494eba))
+- Add new post ([654cfc3](https://github.com/kellen-xavier/ladydebug.github.io/commit/654cfc3056315f98d24cc9ba6fe49026d92164c3))
+- Add publish post ([c2703d3](https://github.com/kellen-xavier/ladydebug.github.io/commit/c2703d31fcaff5accdcb83d643519947b8e4dc35))
+
+### Changed
+
+- Add new post related project lembregotchi ([0e2622b](https://github.com/kellen-xavier/ladydebug.github.io/commit/0e2622b10ca2d8197f3b8aa2d3ec044f7d62ee34))
+
+### Fixed
+
+- Remove post public empty ([130adf0](https://github.com/kellen-xavier/ladydebug.github.io/commit/130adf06d42f2da00897cb0ac7b53759edfb81a9))
 ## [0.3.0] - 2026-08-28
 
 ### Added
@@ -66,6 +81,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 - Caminho da page principal ([9f5b8a0](https://github.com/kellen-xavier/ladydebug.github.io/commit/9f5b8a0552465794c211bf5fea064f2015440d14))
 - Janelas da doca coladas na navbar, botão fechar, e limpa rodapé duplicado ([38e09eb](https://github.com/kellen-xavier/ladydebug.github.io/commit/38e09eb067e06f43b0502571c1990cada91ab555))
+[0.4.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.1.0...v0.2.0
 
