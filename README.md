@@ -1,6 +1,12 @@
-# My new Blog
+# My Blog
 
-[Deploy](https://kellen-xavier.github.io/ladydebug.github.io/)
+My "blog" is a space where I document what I learn and the challenges I face, serving as a "knowledge portfolio." Much like the approach described in *The Pragmatic Programmer*, I view my studies as a continuous investment in my personal and professional growth. The concept is simple: regularly invest in new knowledge, diversify my skill set, and manage the risks associated with focusing on technologies that might eventually become obsolete. In short, it’s about writing and practicing as a way to facilitate my own learning.
+
+[Learn about the book here: The Pragmatic Programmer: From Journeyman to Master](https://a.co/d/00da8YtH)
+
+[Our here](https://github.com/CodesdaLu/Programming-Books/blob/main/o-programador-pragmatico.pdf)
+
+[Deploy on my blog](https://kellen-xavier.github.io/ladydebug.github.io/)
 
 ## Started
 
