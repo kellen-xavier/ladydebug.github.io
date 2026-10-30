@@ -5,6 +5,17 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.0] - 2026-10-30
+
+### Added
+
+- Add function native translate ([dd98c70](https://github.com/kellen-xavier/ladydebug.github.io/commit/dd98c70086b68fea5807f874696be281dc25dca8))
+- Add calendar and glitter in my mouse on my website ([3315d40](https://github.com/kellen-xavier/ladydebug.github.io/commit/3315d401cf320da481bf70c636c06e65341f5f43))
+- Add updates link to match the blogs pink themes and update describe readme ([b58fb5c](https://github.com/kellen-xavier/ladydebug.github.io/commit/b58fb5cb1e3b2928faf11535bbeb219c0ec5c723))
+
+### Fixed
+
+- The CI configuration by adding GOFLAGS: -mod=readonly. Go now ignores Bundler’s vendor/bundle directory when loading Hextra ([028d8f0](https://github.com/kellen-xavier/ladydebug.github.io/commit/028d8f0cad09c51d269c5bc9e456506bf2a77fb4))
 ## [0.4.0] - 2026-10-29
 
 ### Added
@@ -81,6 +92,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 - Caminho da page principal ([9f5b8a0](https://github.com/kellen-xavier/ladydebug.github.io/commit/9f5b8a0552465794c211bf5fea064f2015440d14))
 - Janelas da doca coladas na navbar, botão fechar, e limpa rodapé duplicado ([38e09eb](https://github.com/kellen-xavier/ladydebug.github.io/commit/38e09eb067e06f43b0502571c1990cada91ab555))
+[0.5.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.1.0...v0.2.0
