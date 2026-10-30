@@ -1,6 +1,12 @@
-# My new Blog
+# My Blog
 
-[Deploy](https://kellen-xavier.github.io/ladydebug.github.io/)
+My "blog" is a space where I document what I learn and the challenges I face, serving as a "knowledge portfolio." Much like the approach described in *The Pragmatic Programmer*, I view my studies as a continuous investment in my personal and professional growth. The concept is simple: regularly invest in new knowledge, diversify my skill set, and manage the risks associated with focusing on technologies that might eventually become obsolete. In short, it’s about writing and practicing as a way to facilitate my own learning.
+
+[Learn about the book here: The Pragmatic Programmer: From Journeyman to Master](https://a.co/d/00da8YtH)
+
+[Our here](https://github.com/CodesdaLu/Programming-Books/blob/main/o-programador-pragmatico.pdf)
+
+[Deploy on my blog](https://kellen-xavier.github.io/ladydebug.github.io/)
 
 ## Started
 
@@ -9,6 +15,20 @@ Programming and Quality. This is not a tutorials. This is my daily study, buildi
 
 Well ok. Where from this idea? Good, this ideia emerge from the book The Programatic Programmer.
 Specifically, of the chapter one [get to know the book here](https://www.amazon.com.br/Programador-Pragm%C3%A1tico-Aprendiz-Mestre/dp/8577807002).
+
+## Run this Project
+
+Preview with:
+
+`hugo server -D -F`
+
+Use the language button to select English. Hugo connects the matching files automatically; it does not translate the text for you.
+
+Before publishing, run:
+
+bundle exec ruby scripts/test_multilingual.rb
+bundle exec mdl content README.md
+hugo --gc --minify
 
 ## Testando localmente
 
@@ -74,6 +94,47 @@ corrigir sem risco (ver `scripts/fix_markdown.rb` pra saber exatamente o quê):
 bundle exec ruby scripts/fix_markdown.rb
 ```
 
+## Português e inglês com o seletor nativo
+
+O blog usa o modo multilíngue do Hugo e o seletor de idioma do tema Hextra.
+O botão de idioma no cabeçalho abre as opções **Português** e **English**.
+As páginas em português mantêm suas URLs; as versões em inglês ficam em `/en/`.
+Menus, busca, RSS e os textos da página inicial acompanham o idioma selecionado.
+
+O seletor abre a tradução do post atual. Quando ela ainda não existe, o tema
+leva à página inicial do idioma escolhido. A troca funciona localmente e não
+depende de um serviço externo de tradução.
+
+As traduções são arquivos Markdown separados, com o mesmo nome e o sufixo `.en`:
+
+```text
+content/docs/2026/outubro/meu-post.md
+content/docs/2026/outubro/meu-post.en.md
+
+content/docs/2026/julho/meu-projeto/index.md
+content/docs/2026/julho/meu-projeto/index.en.md
+```
+
+Traduza o título e o conteúdo, preservando data, slug e estado de rascunho.
+Em page bundles, o Hugo compartilha as imagens entre as traduções. Em posts
+soltos com imagens externas ao bundle, use caminhos que resolvam também em `/en/`.
+Os posts publicados já têm versões em inglês; rascunhos continuam como estão.
+Novos posts precisam de uma versão `.en.md` antes de serem publicados.
+
+### Testes do modo multilíngue
+
+Com os mesmos pré-requisitos do blog, execute:
+
+```bash
+bundle exec ruby scripts/test_multilingual.rb
+```
+
+Os testes geram um site temporário e verificam o seletor nativo, a troca entre
+posts equivalentes, o fallback sem tradução, URLs em subdiretórios, textos
+localizados e imagens compartilhadas. Também verificam se cada post publicado
+tem um arquivo em inglês. O workflow `multilingual.yaml` executa os testes nos
+PRs e pushes para `develop` e `main`.
+
 ## Changelog e releases
 
 O `CHANGELOG.md` (formato [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)) é gerado
@@ -105,7 +166,49 @@ tema em arquivos próprios:
 Pra trocar o link do Spotify ou adicionar um evento, é só editar os `.yaml`
 acima — não precisa mexer nos templates.
 
+### Calendário
+
+O botão **Calendário** abre a mesma janela da doca, com uma grade mensal.
+As setas mudam o mês; **Hoje** volta ao dia atual no fuso do visitante.
+O dia atual tem uma borda e os dias com eventos têm um ponto. Clique em um dia
+para ver seus eventos. A interface acompanha o idioma do blog.
+
+Para adicionar eventos, substitua o `[]` de `data/events.yaml` por uma lista:
+
+```yaml
+- date: "2026-11-10"
+  title: "Meu evento"
+  title_en: "My event"
+  url: "https://example.com/evento"
+```
+
+`title_en` e `url` são opcionais. Eventos antigos continuam disponíveis ao
+navegar pelos meses. As alterações aparecem depois do build e deploy do blog.
+O calendário funciona sem serviços externos; sem JavaScript, a janela mostra
+uma lista dos eventos cadastrados.
+
+Para validar o calendário e sua integração com os idiomas:
+
+```bash
+node --test tests/calendar.test.cjs
+bundle exec ruby scripts/test_multilingual.rb
+```
+
 Ícones: [Pixelarticons](https://github.com/halfmage/pixelarticons) (MIT).
+
+### Brilho no cursor
+
+O movimento do mouse deixa uma trilha discreta de estrelas rosas e douradas.
+As partículas duram 600 ms, com no máximo 12 visíveis ao mesmo tempo, e não
+interceptam cliques nem alteram o layout. O efeito fica desativado para toque,
+caneta e preferência de movimento reduzido do sistema.
+
+Os arquivos são `assets/js/cursor-trail.js` e `assets/css/cursor-trail-style.css`.
+Para testar o comportamento do cursor e do calendário:
+
+```bash
+node --test tests/*.test.cjs
+```
 
 Fonte: [Pixelify Sans](https://fonts.google.com/specimen/Pixelify+Sans) (OFL,
 licença em `assets/font/pixelify-sans/OFL.txt`), self-hosted como WOFF2 —

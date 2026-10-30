@@ -1,8 +1,9 @@
 /* Paleta clara e quente + ajustes de layout do blog */
 
 :root {
-  --primary-hue: 16deg;
-  --primary-saturation: 62%;
+  /* Hextra links, hover states and focus rings follow the pink UI accent. */
+  --primary-hue: 326.1deg;
+  --primary-saturation: 55.67%;
   --primary-lightness: 42%;
 
   --ld-bg: #faf6ed;
@@ -16,9 +17,9 @@
 }
 
 .dark {
-  --primary-hue: 18deg;
-  --primary-saturation: 55%;
-  --primary-lightness: 58%;
+  --primary-hue: 326.1deg;
+  --primary-saturation: 55.67%;
+  --primary-lightness: 61.96%;
 
   --ld-bg: #17130f;
   --ld-bg-soft: #211b15;
@@ -190,4 +191,15 @@ body,
 
 .ld-aside nav a:hover {
   color: var(--ld-accent);
+}
+
+/* Keep room for Hextra's native language switcher on narrow screens. */
+@media (max-width: 640px) {
+  .ld-navbar-brand {
+    flex-shrink: 0;
+  }
+
+  .ld-navbar-brand > span {
+    display: none;
+  }
 }
