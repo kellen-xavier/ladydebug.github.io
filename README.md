@@ -160,7 +160,49 @@ tema em arquivos próprios:
 Pra trocar o link do Spotify ou adicionar um evento, é só editar os `.yaml`
 acima — não precisa mexer nos templates.
 
+### Calendário
+
+O botão **Calendário** abre a mesma janela da doca, com uma grade mensal.
+As setas mudam o mês; **Hoje** volta ao dia atual no fuso do visitante.
+O dia atual tem uma borda e os dias com eventos têm um ponto. Clique em um dia
+para ver seus eventos. A interface acompanha o idioma do blog.
+
+Para adicionar eventos, substitua o `[]` de `data/events.yaml` por uma lista:
+
+```yaml
+- date: "2026-11-10"
+  title: "Meu evento"
+  title_en: "My event"
+  url: "https://example.com/evento"
+```
+
+`title_en` e `url` são opcionais. Eventos antigos continuam disponíveis ao
+navegar pelos meses. As alterações aparecem depois do build e deploy do blog.
+O calendário funciona sem serviços externos; sem JavaScript, a janela mostra
+uma lista dos eventos cadastrados.
+
+Para validar o calendário e sua integração com os idiomas:
+
+```bash
+node --test tests/calendar.test.cjs
+bundle exec ruby scripts/test_multilingual.rb
+```
+
 Ícones: [Pixelarticons](https://github.com/halfmage/pixelarticons) (MIT).
+
+### Brilho no cursor
+
+O movimento do mouse deixa uma trilha discreta de estrelas rosas e douradas.
+As partículas duram 600 ms, com no máximo 12 visíveis ao mesmo tempo, e não
+interceptam cliques nem alteram o layout. O efeito fica desativado para toque,
+caneta e preferência de movimento reduzido do sistema.
+
+Os arquivos são `assets/js/cursor-trail.js` e `assets/css/cursor-trail-style.css`.
+Para testar o comportamento do cursor e do calendário:
+
+```bash
+node --test tests/*.test.cjs
+```
 
 Fonte: [Pixelify Sans](https://fonts.google.com/specimen/Pixelify+Sans) (OFL,
 licença em `assets/font/pixelify-sans/OFL.txt`), self-hosted como WOFF2 —

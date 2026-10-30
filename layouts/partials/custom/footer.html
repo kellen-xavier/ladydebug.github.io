@@ -1,6 +1,5 @@
 {{/* Doca fixa + janelas flutuantes. Botões vêm de data/dock.yaml; cada
      "panel" (spotify | events | drafts) tem seu próprio corpo abaixo. */}}
-{{- $today := now.Format "2006-01-02" -}}
 
 <nav class="dock" role="toolbar" aria-label="{{ i18n `dockPanels` }}">
   {{- range site.Data.dock }}
@@ -37,24 +36,8 @@
       </div>
 
     {{- else if eq .panel "events" }}
-      {{- $upcoming := where site.Data.events "date" ">=" $today }}
       <div class="dock-window__body">
-        {{- if $upcoming }}
-          <ul class="dock-window__list">
-            {{- range (sort $upcoming "date") }}
-              <li>
-                {{- if .url }}
-                  <a class="dock-window__item-title" href="{{ .url }}" target="_blank" rel="noreferrer">{{ .title }}</a>
-                {{- else }}
-                  <span class="dock-window__item-title">{{ .title }}</span>
-                {{- end }}
-                <span class="dock-window__item-meta">{{ .date }}</span>
-              </li>
-            {{- end }}
-          </ul>
-        {{- else }}
-          <p class="dock-window__empty">{{ i18n "dockNoEvents" }}</p>
-        {{- end }}
+        {{ partial "calendar.html" $ }}
       </div>
 
     {{- else if eq .panel "drafts" }}
@@ -78,7 +61,17 @@
   </dialog>
 {{- end }}
 
+{{- with resources.Get "js/calendar.js" }}
+  {{ $js := . | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}
+
 {{- with resources.Get "js/desktop-dock.js" }}
+  {{ $js := . | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}
+
+{{- with resources.Get "js/cursor-trail.js" }}
   {{ $js := . | minify | fingerprint }}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 {{ end }}

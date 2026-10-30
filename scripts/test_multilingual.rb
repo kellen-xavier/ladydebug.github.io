@@ -4,6 +4,7 @@
 require 'cgi'
 require 'date'
 require 'fileutils'
+require 'json'
 require 'open3'
 require 'tmpdir'
 require 'uri'
@@ -39,12 +40,19 @@ Dir.mktmpdir('ladydebug-multilingual-') do |work|
     File.write(path, text)
   end
   FileUtils.cp(File.join(ROOT, 'assets/image/icons/cat-icon.jpg'), File.join(content, 'docs/example/image.jpg'))
+  data = File.join(work, 'data')
+  FileUtils.mkdir_p(data)
+  FileUtils.cp(File.join(ROOT, 'data/dock.yaml'), File.join(data, 'dock.yaml'))
+  File.write(File.join(data, 'events.yaml'), [{
+    'date' => '2026-10-29', 'title' => 'Encontro de estudos',
+    'title_en' => 'Study meetup', 'url' => 'https://example.org/event'
+  }].to_yaml)
 
   builds = {}
   { 'root' => 'https://example.org/', 'subpath' => 'http://localhost:1313/blog/' }.each do |name, base|
     destination = File.join(work, name)
     out, err, status = Open3.capture3(
-      { 'HUGO_RESOURCEDIR' => File.join(work, 'resources') },
+      { 'HUGO_RESOURCEDIR' => File.join(work, 'resources'), 'HUGO_DATADIR' => data },
       'hugo', '--source', ROOT, '--contentDir', content, '--destination', destination,
       '--baseURL', base, '--noBuildLock'
     )
@@ -105,6 +113,33 @@ Dir.mktmpdir('ladydebug-multilingual-') do |work|
       path unless File.file?(path.sub(/\.md$/, '.en.md'))
     end
     assert(missing.empty?, "English translations missing:\n#{missing.join("\n")}")
+  end
+  checks['calendar panel has localized navigation and a month table in both languages'] = lambda do
+    { '' => ['Mês anterior', 'Próximo mês', 'Hoje'], 'en' => ['Previous month', 'Next month', 'Today'] }.each do |route, labels|
+      html = page.call(route)
+      assert(html.include?('data-calendar'), "Calendar missing on #{route}")
+      language = route.empty? ? 'pt' : 'en'
+      assert(html.match?(/data-locale="#{language}(?:-[A-Za-z]+)?"/), 'Calendar locale is empty or incorrect')
+      assert(html.match?(/<table\b[^>]*data-calendar-table/m), 'Month table missing')
+      labels.each { |label| assert(html.include?(label), "Calendar label missing: #{label}") }
+      assert(html.include?('calendar.min.'), 'Calendar JavaScript is not loaded')
+    end
+  end
+  checks['event data reaches the calendar with the selected language and date intact'] = lambda do
+    { '' => 'Encontro de estudos', 'en' => 'Study meetup' }.each do |route, expected|
+      attribute = page.call(route).match(/data-events="([^"]*)"/)
+      assert(attribute, 'Calendar event data missing')
+      events = JSON.parse(CGI.unescapeHTML(attribute[1]))
+      assert(events.first == { 'date' => '2026-10-29', 'title' => expected, 'url' => 'https://example.org/event' }, 'Calendar event payload is incorrect')
+    end
+  end
+  checks['both languages load the sparkle effect assets without changing the page content'] = lambda do
+    ['', 'en'].each do |route|
+      html = page.call(route)
+      assert(html.include?('cursor-trail.min.'), 'Cursor trail script missing')
+      assert(html.include?('cursor-trail-style.min.'), 'Cursor trail stylesheet missing')
+      assert(html.include?('class="dock"'), 'Existing dock missing')
+    end
   end
 
   failures = checks.count do |name, check|

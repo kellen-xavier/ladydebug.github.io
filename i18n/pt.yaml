@@ -8,3 +8,9 @@ dockClose: Fechar
 dockSpotify: Abrir no Spotify ↗
 dockNoEvents: Nenhum evento no momento.
 dockNoDrafts: Nenhum rascunho no momento.
+calendarPrevious: Mês anterior
+calendarNext: Próximo mês
+calendarToday: Hoje
+calendarEmptyDay: Nenhum evento neste dia.
+calendarEvents: Eventos
+calendarNoScript: Ative o JavaScript para navegar entre os meses. Eventos cadastrados aparecem abaixo.

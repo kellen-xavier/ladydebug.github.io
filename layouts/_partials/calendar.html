@@ -1,0 +1,37 @@
+{{- $events := slice -}}
+{{- range site.Data.events -}}
+  {{- $title := index . (printf "title_%s" site.Language.Lang) | default .title -}}
+  {{- $events = $events | append (dict "date" .date "title" $title "url" (.url | default "")) -}}
+{{- end -}}
+<div class="dock-calendar" data-calendar hidden
+  data-locale="{{ site.Language.Lang }}"
+  data-events="{{ $events | jsonify }}"
+  data-empty="{{ i18n `calendarEmptyDay` }}"
+  data-events-label="{{ i18n `calendarEvents` }}">
+  <div class="dock-calendar__navigation">
+    <button type="button" data-calendar-move="-1" aria-label="{{ i18n `calendarPrevious` }}">‹</button>
+    <span data-calendar-month id="dock-calendar-month" aria-live="polite"></span>
+    <button type="button" data-calendar-move="1" aria-label="{{ i18n `calendarNext` }}">›</button>
+  </div>
+  <table data-calendar-table class="dock-calendar__table" aria-labelledby="dock-calendar-month">
+    <thead><tr data-calendar-weekdays></tr></thead>
+    <tbody data-calendar-days></tbody>
+  </table>
+  <button type="button" data-calendar-today class="dock-calendar__today">{{ i18n "calendarToday" }}</button>
+  <div class="dock-calendar__events" aria-live="polite" aria-atomic="true">
+    <h3 data-calendar-selected></h3>
+    <ul data-calendar-list class="dock-window__list"></ul>
+  </div>
+</div>
+<noscript>
+  <p>{{ i18n "calendarNoScript" }}</p>
+  {{- if $events }}
+    <ul class="dock-window__list">
+      {{- range sort $events "date" }}
+        <li><span class="dock-window__item-title">{{ .title }}</span> <time datetime="{{ .date }}">{{ .date }}</time></li>
+      {{- end }}
+    </ul>
+  {{- else }}
+    <p class="dock-window__empty">{{ i18n "dockNoEvents" }}</p>
+  {{- end }}
+</noscript>
