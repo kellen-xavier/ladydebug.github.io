@@ -151,3 +151,11 @@ Primeiro foi solicitado para realizar uma análise utilizando o claude.ai, segui
 
 - `.AGENTS.md` (com ponto): usei a convenção padrão `AGENTS.md` na raiz (é o nome que as ferramentas de agente reconhecem) + a pasta `.agents/` para o setup persistente.
 - O PR foi aberto contra **`develop`** (branch padrão do repo), em 4 commits temáticos.
+
+---
+
+### Como tudo ficou?
+
+Como ainda eu estava dentro da plataforma do Notion, e eu gostaria de extrair todos os textos dele e ficar em um repositório meu
+resolvi então a saga para migração de posts do blog para outro Layout que encontrei que é este [template Hextra aqui](https://themes.gohugo.io/themes/hextra/). Resolvi com uso de IA fazer a migração dos posts primeiro então como o Notion tem a opção de extrair arquivo.md é mais simples fazer tudo de uma única vez. Após isso, foi configurar este novo template e adicionar funcionalidades que eu gostaria, e também
+aplicar no layout que é, mais limpo e simples, coisas que eu gostaria. Esta saga continua no post “Refatorando o Blog parte 2”, ainda em rascunho.
