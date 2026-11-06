@@ -1,16 +1,187 @@
 ---
-title: "Testando um jogo existente na Unreal: objetivos e portal no Stack O Bot"
+title: "Testando um jogo existente na Unreal: Stack O Bot"
 date: 2026-11-03
 slug: testando-um-jogo-existente-na-unreal-objetivos-e-portal-no-stack-o-bot
 tags: [jogo]
 draft: true
 ---
 
+## Um pouco sobre Jogos, arquitetura e Testes
+
+A arquitetura de jogos digitais combina princípios tradicionais da Engenharia de Software com necessidades específicas de sistemas interativos em tempo real: renderização, simulação física, processamento de entradas, inteligência artificial, gerenciamento de estados e execução contínua de um ciclo de atualização (Game Loop).
+
+Na Unreal Engine 5.8.3, que eu instalei no sistema operacional, Omarchy, é possível desenvolver e testar esses sistemas utilizando C++, Blueprints e os frameworks de automação fornecidos pela própria Epic Games entre outros.
+
+Fui pesquisar um pouco sobre então, como é a arquitetura de um Jogo
+
+1. Como funciona a arquitetura de um jogo
+
+Uma arquitetura de jogo não é simplesmente uma organização de arquivos. Ela define como as responsabilidades são distribuídas, como os componentes se comunicam e como o estado do jogo evolui a cada atualização.
+
+![image](/content/docs/2026/novembro/images/arquitetura-conceitual.svg)
+
+Essas camadas podem ser compreendidas da seguinte forma:
+
+| Camada | Responsabilidade |
+| --- | --- |
+| Game Application | Inicialização, carregamento, encerramento e configuração |
+| Gameplay | Regras do jogo, combate, pontuação, progressão e interações |
+| Engine | Renderização, física, animação, áudio e gerenciamento de objetos |
+| Plataforma | Integração com Linux, Windows, gráficos e dispositivos |
+| Hardware | Execução na CPU, GPU, memória e periféricos |
+
+A Unreal Engine já implementa grande parte da infraestrutura. O trabalho do desenvolvedor costuma concentrar-se nos sistemas de gameplay, conteúdo e integrações.
+
+## 1.1. O Game Loop
+
+Diferentemente de muitos sistemas web, os jogos executam um ciclo contínuo que atualiza a simulação e produz quadros na tela.
+
+Exemplos:
+
+**Um ciclo típico envolve:**
+
+1. Capturar entradas de teclado, mouse ou controle.
+2. Atualizar estado e regras de gameplay.
+3. Executar ou consultar a simulação física.
+4. Produzir as informações necessárias para renderização.
+5. Apresentar o quadro e continuar a execução.
+
+# 2. A arquitetura específica da Unreal Engine
+
+A Unreal utiliza um framework de gameplay orientado a objetos, com composição de componentes e classes que possuem ciclos de vida específicos.
+
+Gameplay Framework
+
+Define classes-base para entidades, controladores, estado da sessão e representação do jogador. Inclui `Actor`, `Pawn`, `Character`, `GameMode`, `GameState` e `PlayerController`.
+
+**Blueprints**
+
+Sistema visual de programação utilizado para criar comportamentos, protótipos, lógica de gameplay e integração com classes C++.
+
+**Levels e Assets**
+
+Os níveis representam ambientes do jogo. Os assets incluem materiais, texturas, animações, Blueprints e outros conteúdos.
+
+Exemplos práticos:
+
+
+
+Principais classes da Unreal
+
+| Classe | Responsabilidade |
+| --- | --- |
+| `UGameInstance` | Estado e serviços que persistem entre carregamentos de níveis |
+| `AGameModeBase` | Define regras e configuração de uma sessão; no multiplayer, existe no servidor |
+| `AGameStateBase` | Representa estado compartilhado da partida |
+| `APlayerController` | Recebe e coordena comandos do jogador |
+| `APawn` | Entidade controlável por jogador ou IA |
+| `ACharacter` | Pawn especializado para personagens, com suporte a movimentação |
+| `AActor` | Entidade que pode existir em um mundo |
+| `UActorComponent` | Funcionalidade reutilizável associada a um Actor |
+
+[Fonte: gameplay framework in unreal engine](https://dev.epicgames.com/documentation/unreal-engine/gameplay-framework-in-unreal-engine?lang=pt-BR)
+
+Um exemplo simples: o jogador pressiona um botão, o `PlayerController` processa a entrada, o `Character` executa uma ação e um componente de saúde atualiza o estado do personagem.
+
+## Organização interna do código
+
+Uma organização por funcionalidade é adequada para um projeto de médio porte:
+
+Source/
+└── GameEngineeringLab/
+├── GameEngineeringLab.Build.cs
+├── Public/
+│   ├── Characters/
+│   ├── Combat/
+│   ├── Inventory/
+│   └── Systems/
+└── Private/
+├── Characters/
+├── Combat/
+├── Inventory/
+├── Systems/
+└── Tests/
+├── Unit/
+└── Integration/
+
+O papel de `Public` e `Private` está relacionado à exposição e implementação de código C++ dentro do sistema de módulos da Unreal. Não é necessário colocar todas as classes em `Public`: classes utilizadas apenas internamente podem permanecer em `Private`.
+
+Para projetos maiores, é possível criar módulos separados como `GameCore`, `GameRuntime` e `GameTests`, ou plugins próprios.
+
+Comparação com outros projetos de software, veja abaixo exemplos:
+
+| Aplicações tradicionais | Desenvolvimento de games |
+| --- | --- |
+| Entidades e modelos de domínio | Objetos de gameplay, Actors e componentes |
+| Serviços e casos de uso | Sistemas de gameplay |
+| Controladores de requisição | Controllers de jogador, em sentido diferente |
+| Banco de dados | Estado persistido, SaveGame ou serviços externos |
+| Interface web | HUD, widgets e menus |
+| Processamento de eventos | Eventos, inputs e atualizações do mundo |
+| Testes de integração | Testes entre sistemas de gameplay |
+| Testes E2E | Simulação de fluxos completos no jogo |
+
+> A correspondência é conceitual, não uma equivalência de classes. Por exemplo, o PlayerController da Unreal não desempenha a mesma função de um controller HTTP em uma aplicação ASP.NET.
+
+# 3. Estrutura típica de um projeto de game
+
+Um projeto Unreal geralmente tem três grandes categorias de arquivos: código-fonte, assets e configuração. Outros diretórios são gerados automaticamente por compilação, cache e execução.
+
+A estrutura abaixo combina os diretórios oficiais da Unreal com uma organização modular que proponho para um projeto de estudo.
+
+A documentação oficial confirma que `Source/` contém código-fonte, `Content/` armazena assets e `Config/` define configurações. `Intermediate/` e `Saved/` contêm dados reconstruíveis, enquanto `Binaries/` guarda executáveis e outros artefatos compilados.
+
+[Fonte: Unreal Engine Directory and Structure](https://dev.epicgames.com/documentation/unreal-engine/unreal-engine-directory-structure)
+
+A separação entre responsabilidades facilita a criação de testes, especialmente quando as regras de negócio do jogo não dependem diretamente de animações, renderização ou elementos visuais.
+
+[Automation Test Framework:](https://dev.epicgames.com/documentation/unreal-engine/automation-test-framework-in-unreal-engine)
+
+**No Unreal Editor 5.8:**
+
+1. Abra `Edit > Plugins` e procure a categoria Testing.
+2. Habilite Functional Testing Editor para trabalhar com testes funcionais.
+3. Reinicie o editor, caso solicitado.
+4. Acesse `Tools > Test Automation`.
+5. Selecione os testes disponíveis e execute com Start Tests.
+
+O framework de automação C++ **não exige que todos os plugins de teste estejam habilitados**. A ativação de plugins específicos depende do tipo de teste.
+
+6. Como organizar uma arquitetura de jogos testável
+Para evoluir o laboratório, proponho uma separação entre regras de domínio, integração com a Unreal e apresentação.
+
+![image](/content/docs/2026/novembro/images/arquitetura-proposta-game-enginee.svg)
+
+Essa separação permite utilizar testes de diferentes níveis sem duplicar responsabilidades.
+
+| Nível de teste | Exemplo | Dependência da engine |
+| --- | --- | --- |
+| Unitário | Cálculo de dano | Nenhuma ou mínima |
+| Integração | HealthComponent + Character | Sim |
+| Funcional | Personagem recebe dano em um mapa | Sim |
+| E2E | Jogador inicia, interage e conclui objetivo | Sim, jogo em execução |
+| Performance | Verificar tempo de quadro e consumo de recursos | Sim |
+
+Um detalhe importante: testes unitários de lógica pura e testes funcionais de gameplay não precisam utilizar o mesmo mecanismo de execução. A própria Epic distingue o Automation Framework dos Low-Level Tests, que são mais apropriados para isolamento de baixo nível.
+
+## Referencias
+
+As referências oficiais mais úteis para esse estudo são:
+
+- Unreal Engine — Gameplay Framework: fundamentos arquiteturais de Actors, Controllers e estados.
+- Unreal Engine — Directory Structure: organização de projetos, módulos e arquivos.
+- Unreal Engine — Automation Test Framework: estrutura e tipos de testes automatizados.
+- Unreal Engine — Functional Testing: testes funcionais executados em Levels.
+- Game Programming Patterns — Robert Nystrom: padrões como Game Loop, Component, Event Queue e State. Disponível em gameprogrammingpatterns.com.
+- Game Engine Architecture — Jason Gregory: arquitetura interna de motores de jogos, subsistemas e gerenciamento de recursos.
+
+---
+
 ## Testando um jogo existente na Unreal: objetivos e portal no Stack O Bot
 
 Setting up test Environment - S.O Linux Omarchy (Arch Linux Config) | Unreal Engine
 
-Resolvi, refazer um dos testes que havia trabalhado a cerca de três/dois anos atrás (2023/2024) em um trabalho que era QA em Games (Simulador). 
+Resolvi, refazer um dos testes que havia trabalhado a cerca de três/dois anos atrás (2023/2024) em um trabalho que era QA em Games (Simulador).
 
 Preparando meu setup para validações de um game pronto, da Epic Games, para o computador. Primeiro meu setup atual é o Omarchy Linux (based no arch linux - [página do S.O aqui](https://omarchy.org/)) fui verificar no GPT como estava as bibliotecas e drives (se tem suporte oficial da Unreal e afins) sem baixar drives sem updates ou maliciosos. Foi recomendado as seguinte dependências úteis.
 
@@ -87,7 +258,7 @@ selecionar versão
 ↓
 Install
 
-[Com base nos requisitos recomendados:](https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine](https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine?lang=pt-BR)
+[Com base nos requisitos recomendados:](<https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine>](<https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine?lang=pt-BR>)
 
 Esta dentro do recomendado.
 
@@ -187,8 +358,6 @@ Escolhi este jogo mas também precisei organizar o projeto na pasta para que fiq
 Clica no jogo para abrir e segue, pode adicionar o plugin de testes
 
 ![alt text](/content/docs/2026/novembro/images/image%2014.png)
-
-
 
 ---
 
