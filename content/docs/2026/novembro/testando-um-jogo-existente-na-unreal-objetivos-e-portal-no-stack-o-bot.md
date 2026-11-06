@@ -14,11 +14,11 @@ Na Unreal Engine 5.8.3, que eu instalei no sistema operacional, Omarchy, é poss
 
 Fui pesquisar um pouco sobre então, como é a arquitetura de um Jogo
 
-1. Como funciona a arquitetura de um jogo
+## 1. Como funciona a arquitetura de um jogo
 
 Uma arquitetura de jogo não é simplesmente uma organização de arquivos. Ela define como as responsabilidades são distribuídas, como os componentes se comunicam e como o estado do jogo evolui a cada atualização.
 
-![image](/content/docs/2026/novembro/images/arquitetura-conceitual.svg)
+![image](images/arquitetura-conceitual.svg)
 
 Essas camadas podem ser compreendidas da seguinte forma:
 
@@ -32,7 +32,7 @@ Essas camadas podem ser compreendidas da seguinte forma:
 
 A Unreal Engine já implementa grande parte da infraestrutura. O trabalho do desenvolvedor costuma concentrar-se nos sistemas de gameplay, conteúdo e integrações.
 
-## 1.1. O Game Loop
+### 1.1. O Game Loop
 
 Diferentemente de muitos sistemas web, os jogos executam um ciclo contínuo que atualiza a simulação e produz quadros na tela.
 
@@ -46,27 +46,25 @@ Exemplos:
 4. Produzir as informações necessárias para renderização.
 5. Apresentar o quadro e continuar a execução.
 
-# 2. A arquitetura específica da Unreal Engine
+## 2. A arquitetura específica da Unreal Engine
 
 A Unreal utiliza um framework de gameplay orientado a objetos, com composição de componentes e classes que possuem ciclos de vida específicos.
 
-Gameplay Framework
+### Gameplay Framework
 
 Define classes-base para entidades, controladores, estado da sessão e representação do jogador. Inclui `Actor`, `Pawn`, `Character`, `GameMode`, `GameState` e `PlayerController`.
 
-**Blueprints**
+### Blueprints
 
 Sistema visual de programação utilizado para criar comportamentos, protótipos, lógica de gameplay e integração com classes C++.
 
-**Levels e Assets**
+### Levels e Assets
 
 Os níveis representam ambientes do jogo. Os assets incluem materiais, texturas, animações, Blueprints e outros conteúdos.
 
 Exemplos práticos:
 
-
-
-Principais classes da Unreal
+### Principais classes da Unreal
 
 | Classe | Responsabilidade |
 | --- | --- |
@@ -83,10 +81,11 @@ Principais classes da Unreal
 
 Um exemplo simples: o jogador pressiona um botão, o `PlayerController` processa a entrada, o `Character` executa uma ação e um componente de saúde atualiza o estado do personagem.
 
-## Organização interna do código
+### Organização interna do código
 
 Uma organização por funcionalidade é adequada para um projeto de médio porte:
 
+```text
 Source/
 └── GameEngineeringLab/
 ├── GameEngineeringLab.Build.cs
@@ -103,6 +102,7 @@ Source/
 └── Tests/
 ├── Unit/
 └── Integration/
+```
 
 O papel de `Public` e `Private` está relacionado à exposição e implementação de código C++ dentro do sistema de módulos da Unreal. Não é necessário colocar todas as classes em `Public`: classes utilizadas apenas internamente podem permanecer em `Private`.
 
@@ -123,7 +123,7 @@ Comparação com outros projetos de software, veja abaixo exemplos:
 
 > A correspondência é conceitual, não uma equivalência de classes. Por exemplo, o PlayerController da Unreal não desempenha a mesma função de um controller HTTP em uma aplicação ASP.NET.
 
-# 3. Estrutura típica de um projeto de game
+## 3. Estrutura típica de um projeto de game
 
 Um projeto Unreal geralmente tem três grandes categorias de arquivos: código-fonte, assets e configuração. Outros diretórios são gerados automaticamente por compilação, cache e execução.
 
@@ -147,10 +147,11 @@ A separação entre responsabilidades facilita a criação de testes, especialme
 
 O framework de automação C++ **não exige que todos os plugins de teste estejam habilitados**. A ativação de plugins específicos depende do tipo de teste.
 
-6. Como organizar uma arquitetura de jogos testável
+## Como organizar uma arquitetura de jogos testável
+
 Para evoluir o laboratório, proponho uma separação entre regras de domínio, integração com a Unreal e apresentação.
 
-![image](/content/docs/2026/novembro/images/arquitetura-proposta-game-enginee.svg)
+![image](images/arquitetura-proposta-game-enginee.svg)
 
 Essa separação permite utilizar testes de diferentes níveis sem duplicar responsabilidades.
 
@@ -204,7 +205,7 @@ vulkaninfo --summary
 
 ### Retornos dos comandos
 
-![image](/content/docs/2026/novembro/images/image.png)
+![image](images/image.png)
 
 Como minha placa de vídeo é da NVIDIA precisei conferir os drives dela (NVIDIA geralmente é a que menos tem compatibilidade com o Linux)
 
@@ -212,7 +213,7 @@ Como minha placa de vídeo é da NVIDIA precisei conferir os drives dela (NVIDIA
 nvidia-smi
 ```
 
-![image](/content/docs/2026/novembro/images/image%201.png)
+![image](images/image%201.png)
 
 - placa de vídeo com compatibilidade = ok
 
@@ -230,7 +231,7 @@ Fazer o Install:
 # Extraia para uma pasta própria:
 unzip Linux_Unreal_Engine*.zip \
   -d ~/Applications/UnrealEngine/UE_5.8
-  
+
 # go in
 cd ~/Applications/UnrealEngine/UE_5.8
 
@@ -239,11 +240,11 @@ chmod +x Engine/Binaries/Linux/UnrealEditor
 
 # run
 ./Engine/Binaries/Linux/UnrealEditor
-
 ```
 
 ### Flow
 
+```text
 Epic Games Launcher
 ↓
 Unreal Engine
@@ -257,16 +258,17 @@ Engine Versions
 selecionar versão
 ↓
 Install
+```
 
-[Com base nos requisitos recomendados:](<https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine>](<https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine?lang=pt-BR>)
+[Com base nos requisitos recomendados](https://dev.epicgames.com/documentation/unreal-engine/linux-development-requirements-for-unreal-engine?lang=pt-BR)
 
 Esta dentro do recomendado.
 
-![image](/content/docs/2026/novembro/images/image%202.png)
+![image](images/image%202.png)
 
 Omarchy setup
 
-![image](/content/docs/2026/novembro/images/image%203.png)
+![image](images/image%203.png)
 
 ## Pesquisa de Jogo para Testes
 
@@ -297,31 +299,31 @@ Em particular este jogo bastante pontos que é possível validar, seguindo o tut
 
 Unreal Engine Open
 
-![image](/content/docs/2026/novembro/images/image%204.png)
+![image](images/image%204.png)
 
 Game adicionado a biblioteca
 
-![image](/content/docs/2026/novembro/images/image%205.png)
+![image](images/image%205.png)
 
-![image](/content/docs/2026/novembro/images/image%206.png)
+![image](images/image%206.png)
 
 Login conta Epic
 
-![image](/content/docs/2026/novembro/images/image%207.png)
+![image](images/image%207.png)
 
 Selecionar o game para abrir o projeto
 
-![image](/content/docs/2026/novembro/images/image%208.png)
+![image](images/image%208.png)
 
 Selecionando pasta do projeto para criar
 
-![image](/content/docs/2026/novembro/images/image%209.png)
+![image](images/image%209.png)
 
 Download
 
-![image](/content/docs/2026/novembro/images/image%2010.png)
+![image](images/image%2010.png)
 
-![image](/content/docs/2026/novembro/images/image%2011.png)
+![image](images/image%2011.png)
 
 ---
 
@@ -337,9 +339,9 @@ O log mostra que o link assinado já estava inválido quando o Launcher tentou u
 
 Isso torna improvável que o link tenha expirado **por causa da duração do download (ou algum problema de internet)**. O padrão sugere que o fluxo do Fab/Launcher estava entregando ou reutilizando links que **já estavam vencidos**. **Os logs não permitem determinar se a origem foi o serviço do Epic/Fab ou a renovação dos links no Launcher Linux.** O HTTP 410 indica que o recurso deixou de estar disponível; a documentação do Fab confirma que os produtos para Unreal Engine são baixados pela integração com o Fab/Launcher, mas não informa o prazo de validade desses links.
 
-[Link RFC 9110]([https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html))
+[Link RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html)
 
-[Documentação Fab]([https://dev.epicgames.com/documentation/fab/purchasing-and-downloading-assets-in-fab](https://dev.epicgames.com/documentation/fab/purchasing-and-downloading-assets-in-fab))
+[Documentação Fab](https://dev.epicgames.com/documentation/fab/purchasing-and-downloading-assets-in-fab)
 
 Para começar seu projeto agora, recomendo criar um projeto **Third Person** no Unreal 5.8. O template já vem com personagem jogável e nível básico, sem precisar baixar outro pacote do Fab. [A documentação da Epic explica como criar o projeto](https://dev.epicgames.com/documentation/unreal-engine/create-your-first-project-in-unreal-engine).
 
@@ -351,13 +353,13 @@ Se você prefere um sample de jogo para baixar, a alternativa é **Stack O’ Bo
 
 Escolhi este jogo mas também precisei organizar o projeto na pasta para que fique dentro Unreal Projects
 
-![alt text](/content/docs/2026/novembro/images/image%2012.png)
+![alt text](images/image%2012.png)
 
-![alt text](/content/docs/2026/novembro/images/image%2013.png)
+![alt text](images/image%2013.png)
 
 Clica no jogo para abrir e segue, pode adicionar o plugin de testes
 
-![alt text](/content/docs/2026/novembro/images/image%2014.png)
+![alt text](images/image%2014.png)
 
 ---
 

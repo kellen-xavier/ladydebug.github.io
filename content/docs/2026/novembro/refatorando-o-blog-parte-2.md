@@ -7,4 +7,3 @@ draft: true
 ---
 
 ## Refatorando o Blog parte 2
-

@@ -34,3 +34,6 @@ jobs:
 
       - name: Test native multilingual behavior
         run: bundle exec ruby scripts/test_multilingual.rb
+
+      - name: Build published and draft content
+        run: hugo --buildDrafts --buildFuture --minify --destination "${{ runner.temp }}/hugo-content-check"

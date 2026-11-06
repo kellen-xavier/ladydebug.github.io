@@ -158,4 +158,4 @@ Primeiro foi solicitado para realizar uma análise utilizando o claude.ai, segui
 
 Como ainda eu estava dentro da plataforma do Notion, e eu gostaria de extrair todos os textos dele e ficar em um repositório meu
 resolvi então a saga para migração de posts do blog para outro Layout que encontrei que é este [template Hextra aqui](https://themes.gohugo.io/themes/hextra/). Resolvi com uso de IA fazer a migração dos posts primeiro então como o Notion tem a opção de extrair arquivo.md é mais simples fazer tudo de uma única vez. Após isso, foi configurar este novo template e adicionar funcionalidades que eu gostaria, e também
-aplicar no layout que é, mais limpo e simples, coisas que eu gostaria. Esta saga fica [neste Post aqui](/content/docs/2026/novembro/refatorando-o-blog-parte-2.md)
+aplicar no layout que é, mais limpo e simples, coisas que eu gostaria. Esta saga continua no post “Refatorando o Blog parte 2”, ainda em rascunho.

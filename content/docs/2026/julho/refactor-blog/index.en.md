@@ -151,3 +151,9 @@ First I requested an analysis through claude.ai, then wrote the following instru
 
 - For `.AGENTS.md`, with a leading dot, I used the standard `AGENTS.md` convention at the root, the name agent tools recognize, plus an `.agents/` folder for persistent setup.
 - The PR targeted **develop**, the repository's default branch, in four thematic commits.
+
+---
+
+### How did it turn out?
+
+I was still using Notion, but wanted to extract all the text and keep it in my own repository. That started the migration to a different layout: the [Hextra template](https://themes.gohugo.io/themes/hextra/). I used AI to migrate the posts first. Since Notion can export Markdown files, moving everything at once was simpler. Then I configured the new template, added the features I wanted, and adapted its cleaner, simpler layout. This continues in “Refactoring the blog — part 2”, which is still a draft.
