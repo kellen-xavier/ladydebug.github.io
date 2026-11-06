@@ -5,6 +5,17 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.1] - 2026-11-06
+
+### Changed
+
+- Add meu test na unreal enginee ([790304f](https://github.com/kellen-xavier/ladydebug.github.io/commit/790304fa2135f0969092d306eb56f055d7f5df80))
+- Add novo post sobre o blog ([89f8b77](https://github.com/kellen-xavier/ladydebug.github.io/commit/89f8b775e141f10a36da0f458a10c4ea618e120b))
+- Add text about my workstation portifolio ([d1e6201](https://github.com/kellen-xavier/ladydebug.github.io/commit/d1e6201c9b31f04a7d845d086a0556431cedc793))
+
+### Fixed
+
+- Correct PR 27 content checks and post links ([382d2ef](https://github.com/kellen-xavier/ladydebug.github.io/commit/382d2ef78cdc42cef39eebb948d64619c7b4f868))
 ## [0.5.0] - 2026-10-30
 
 ### Added
@@ -92,6 +103,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 - Caminho da page principal ([9f5b8a0](https://github.com/kellen-xavier/ladydebug.github.io/commit/9f5b8a0552465794c211bf5fea064f2015440d14))
 - Janelas da doca coladas na navbar, botão fechar, e limpa rodapé duplicado ([38e09eb](https://github.com/kellen-xavier/ladydebug.github.io/commit/38e09eb067e06f43b0502571c1990cada91ab555))
+[0.5.1]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.2.0...v0.3.0
