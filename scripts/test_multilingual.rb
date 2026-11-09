@@ -10,7 +10,9 @@ require 'tmpdir'
 require 'uri'
 require 'yaml'
 
-ROOT = File.expand_path('..', __dir__)
+require_relative 'lib/post_layout'
+
+ROOT = PostLayout::ROOT
 
 def assert(condition, message)
   raise message unless condition
@@ -30,16 +32,17 @@ Dir.mktmpdir('ladydebug-multilingual-') do |work|
     '_index.en.md' => "---\ntitle: Blog\n---\nMy notes.\n",
     'docs/_index.md' => "---\ntitle: Posts\ncascade:\n  type: blog\n---\n",
     'docs/_index.en.md' => "---\ntitle: Posts\ncascade:\n  type: blog\n---\n",
-    'docs/example/index.md' => "---\ntitle: Meu estudo\ndate: 2020-01-01\nfeatured: true\n---\nTexto em português.\n",
-    'docs/example/index.en.md' => "---\ntitle: My study\ndate: 2020-01-01\nfeatured: true\n---\nEnglish text.\n\n![Example](image.jpg)\n",
-    'docs/only-portuguese.md' => "---\ntitle: Sem tradução\ndate: 2020-01-02\n---\nPortuguês.\n"
+    'docs/2020/janeiro/01-01/meu-estudo.md' => "---\ntitle: Meu estudo\nurl: /docs/example/\ndate: 2020-01-01\nfeatured: true\n---\nTexto em português.\n\n![Example](../images/image.jpg)\n",
+    'docs/2020/janeiro/01-01/meu-estudo.en.md' => "---\ntitle: My study\nurl: /en/docs/example/\ndate: 2020-01-01\nfeatured: true\n---\nEnglish text.\n\n![Example](../images/image.jpg)\n",
+    'docs/2020/janeiro/02-01/sem-traducao.md' => "---\ntitle: Sem tradução\nurl: /docs/only-portuguese/\ndate: 2020-01-02\n---\nPortuguês.\n"
   }
   fixtures.each do |name, text|
     path = File.join(content, name)
     FileUtils.mkdir_p(File.dirname(path))
     File.write(path, text)
   end
-  FileUtils.cp(File.join(ROOT, 'assets/image/icons/cat-icon.jpg'), File.join(content, 'docs/example/image.jpg'))
+  FileUtils.mkdir_p(File.join(content, 'docs/2020/janeiro/images'))
+  FileUtils.cp(File.join(ROOT, 'assets/image/icons/cat-icon.jpg'), File.join(content, 'docs/2020/janeiro/images/image.jpg'))
   data = File.join(work, 'data')
   FileUtils.mkdir_p(data)
   FileUtils.cp(File.join(ROOT, 'data/dock.yaml'), File.join(data, 'dock.yaml'))
@@ -89,12 +92,18 @@ Dir.mktmpdir('ladydebug-multilingual-') do |work|
     %w[Highlights January].each { |label| assert(html.include?(label), "Missing English label #{label}") }
     assert(html.include?('On this page'), 'English contents label missing')
   end
-  checks['translated page bundles reuse images without copying them'] = lambda do
-    html = page.call('en/docs/example')
-    image = html.scan(/<img\b([^>]*)>/m).map { |a| a.first.scan(/([\w-]+)="([^"]*)"/).to_h }.find { |a| a['alt'] == 'Example' }
-    assert(image, 'Translated post image missing')
-    path = URI.join('https://example.org/en/docs/example/', image['src']).path
-    assert(File.file?(File.join(builds.fetch('root'), path.delete_prefix('/'))), 'Translated image URL does not resolve')
+  checks['dated posts share monthly images while keeping their published URLs'] = lambda do
+    %w[root subpath].each do |build|
+      %w[docs/example en/docs/example].each do |route|
+        html = page.call(route, build)
+        image = html.scan(/<img\b([^>]*)>/m).map { |a| a.first.scan(/([\w-]+)="([^"]*)"/).to_h }.find { |a| a['alt'] == 'Example' }
+        assert(image, 'Post image missing')
+        path = URI.join("https://example.org/#{route}/", image['src']).path
+        prefix = build == 'subpath' ? '/blog/' : '/'
+        assert(path.start_with?(prefix), 'Image ignores the hosting subdirectory')
+        assert(File.file?(File.join(builds.fetch(build), path.delete_prefix(prefix))), 'Shared image URL does not resolve')
+      end
+    end
   end
   checks['the external Google Translate integration is absent'] = lambda do
     assert(!page.call('').include?('translate.google.com'), 'External translation link still exists')

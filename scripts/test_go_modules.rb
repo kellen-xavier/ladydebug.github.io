@@ -8,7 +8,9 @@ require 'open3'
 require 'tmpdir'
 require 'yaml'
 
-root = File.expand_path('..', __dir__)
+require_relative 'lib/post_layout'
+
+root = PostLayout::ROOT
 workflow = YAML.safe_load(File.read(File.join(root, '.github/workflows/multilingual.yaml')))
 flags = workflow.dig('jobs', 'multilingual', 'env', 'GOFLAGS') || ''
 

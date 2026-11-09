@@ -69,12 +69,67 @@ hugo --gc --minify
 ruby scripts/new_post.rb "Título do post" "tag1, tag2"
 ```
 
-Gera `content/docs/<ano>/<mês em português>/<slug>.md` (criando as pastas de
-ano/mês se ainda não existirem) com o front matter já preenchido — `title`,
-`date` (data de hoje), `slug` (gerado a partir do título) e `tags` — e
-`draft: true`. Título e tags também podem ser omitidos na chamada: o script
-pergunta interativamente. Quando o post estiver pronto pra publicar, troque
-`draft: true` para `draft: false` manualmente.
+O script usa a data de hoje, cria as pastas e preenche título, data, slug,
+tags e `draft: true`. Sem argumentos, pergunta o título e as tags.
+Para registrar um texto antigo, informe a data original:
+
+```bash
+ruby scripts/new_post.rb --date 2023-02-04 "Meu post" "testes, desempenho"
+```
+
+Todos os posts seguem esta estrutura. Os meses usam apenas o nome em português, sem prefixo numérico e sem acentos.
+As pastas dos dias seguem o formato `DD-MM`:
+
+```text
+content/docs/
+└── 2023/
+    └── fevereiro/
+        ├── 04-02/
+        │   ├── meu-post.md
+        │   └── meu-post.en.md
+        ├── 15-02/
+        │   └── outro-post.md
+        └── images/
+            ├── meu-post--resultado.png
+            └── outro-post--resultado.png
+```
+
+A pasta `04-02` significa **dia 04 de fevereiro**. Vários posts podem ficar
+no mesmo dia, cada um com seu nome descritivo. As imagens ficam na pasta
+`images` do mês, compartilhadas entre português e inglês. Use o nome do post
+como prefixo da imagem para evitar colisões:
+
+```markdown
+![Resultado do teste](../images/meu-post--resultado.png)
+```
+
+A data do front matter determina a organização. Para publicar, revise o
+texto e troque `draft: true` por `draft: false`. O criador recusa datas inválidas
+e nunca sobrescreve um post existente. Os arquivos `_index.md` e `_index.en.md`
+da seção `docs` continuam sendo índices da seção.
+
+### Migrar e conferir a estrutura
+
+Os posts existentes foram reorganizados mantendo suas URLs no campo `url`
+do front matter. Preserve esse campo ao editar ou traduzir esses textos.
+A migração ajusta referências de imagens e `relref`, mantém os arquivos de
+imagem e recusa colisões entre posts antes de gravar.
+
+```bash
+# Apenas mostrar os destinos, sem alterar arquivos
+ruby scripts/migrate_posts.rb
+
+# Aplicar a migração em conteúdo importado no formato antigo
+ruby scripts/migrate_posts.rb --apply
+
+# Conferir todos os caminhos e testar os scripts
+ruby scripts/check_post_layout.rb
+ruby scripts/test_post_layout.rb
+```
+
+Os scripts encontram a raiz do projeto pela própria localização, mesmo quando
+chamados de outro diretório. O CI verifica a estrutura, a criação de posts,
+a segurança da migração e as imagens nas traduções.
 
 ## Lint de Markdown
 
@@ -108,16 +163,16 @@ depende de um serviço externo de tradução.
 As traduções são arquivos Markdown separados, com o mesmo nome e o sufixo `.en`:
 
 ```text
-content/docs/2026/outubro/meu-post.md
-content/docs/2026/outubro/meu-post.en.md
-
-content/docs/2026/julho/meu-projeto/index.md
-content/docs/2026/julho/meu-projeto/index.en.md
+content/docs/2026/outubro/29-10/meu-post.md
+content/docs/2026/outubro/29-10/meu-post.en.md
 ```
 
 Traduza o título e o conteúdo, preservando data, slug e estado de rascunho.
-Em page bundles, o Hugo compartilha as imagens entre as traduções. Em posts
-soltos com imagens externas ao bundle, use caminhos que resolvam também em `/en/`.
+Nos posts migrados, mantenha a URL original do português e use a mesma URL
+com o prefixo `/en/` na tradução. Por exemplo, `url: /docs/meu-post/`
+e `url: /en/docs/meu-post/`. Posts novos não precisam desse campo.
+Ambos os idiomas usam `../images/nome-do-post--imagem.png`, com uma única
+cópia de cada imagem na pasta do mês.
 Os posts publicados já têm versões em inglês; rascunhos continuam como estão.
 Novos posts precisam de uma versão `.en.md` antes de serem publicados.
 
