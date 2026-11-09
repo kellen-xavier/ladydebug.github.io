@@ -32,6 +32,12 @@ jobs:
       - name: Check Go modules with Bundler vendor directory
         run: bundle exec ruby scripts/test_go_modules.rb
 
+      - name: Test post creation and migration
+        run: bundle exec ruby scripts/test_post_layout.rb
+
+      - name: Check post directory convention
+        run: bundle exec ruby scripts/check_post_layout.rb
+
       - name: Test native multilingual behavior
         run: bundle exec ruby scripts/test_multilingual.rb
 

@@ -47,6 +47,9 @@
 #   bundle exec ruby scripts/fix_markdown.rb --dry-run     # só mostra o que mudaria, não escreve nada
 #   bundle exec ruby scripts/fix_markdown.rb caminho.md    # roda só num arquivo (ainda usa o mdl geral p/ MD036)
 
+require_relative 'lib/post_layout'
+Dir.chdir(PostLayout::ROOT)
+
 require 'open3'
 require 'set'
 
