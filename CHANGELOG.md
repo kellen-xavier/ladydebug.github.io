@@ -5,6 +5,13 @@ Todas as mudanças notáveis deste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [0.5.2] - 2026-11-09
+
+### Changed
+
+- Archive Medium performance article from 2023 ([8fe24ba](https://github.com/kellen-xavier/ladydebug.github.io/commit/8fe24bacde038383117ae230614e0036338a83c5))
+- Padronizar estrutura de pastas em posts ([1b99ae4](https://github.com/kellen-xavier/ladydebug.github.io/commit/1b99ae42650e53e3f30e4eab4ca401a6717000ce))
+- Documenta comandos e scripts ([d7afb6a](https://github.com/kellen-xavier/ladydebug.github.io/commit/d7afb6aaabc4d1c920b732cfc9f7d3fdd7838a05))
 ## [0.5.1] - 2026-11-06
 
 ### Changed
@@ -103,6 +110,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 - Caminho da page principal ([9f5b8a0](https://github.com/kellen-xavier/ladydebug.github.io/commit/9f5b8a0552465794c211bf5fea064f2015440d14))
 - Janelas da doca coladas na navbar, botão fechar, e limpa rodapé duplicado ([38e09eb](https://github.com/kellen-xavier/ladydebug.github.io/commit/38e09eb067e06f43b0502571c1990cada91ab555))
+[0.5.2]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/kellen-xavier/ladydebug.github.io/compare/v0.3.0...v0.4.0
