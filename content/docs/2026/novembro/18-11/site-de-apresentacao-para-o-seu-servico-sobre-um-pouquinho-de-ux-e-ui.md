@@ -6,11 +6,10 @@ tags: []
 draft: true
 ---
 
-A ideia deste projeto foi criar um site para apresentar os serviços da Elementar Projetos, explicar o atendimento e facilitar o pedido de orçamento. O foco são serviços de PPCI e regularização de imóveis.
+A ideia deste projeto foi criar um site para apresentar os serviços da Elementar Projetos, explicar o atendimento e facilitar o pedido de orçamento.
+O foco são serviços de PPCI e regularização de imóveis.
 
-O site começou como uma landing page e foi ganhando outras partes: edição de conteúdo pelo painel, blog, páginas de serviços e melhorias no formulário. Neste post, quero deixar o registro de como essa construção aconteceu tecnicamente e, depois, dos ajustes de interface e usabilidade.
-
-Este é um registro do código, do histórico e da documentação analisados em 18 de novembro de 2026. As funcionalidades descritas aqui não significam, por si só, que houve melhora medida em conversões ou que todas as alterações já estejam publicadas em produção.
+O site começou como uma landing page bem simples só para mostrar o serviço e marca que o cliente queria e foi ganhando outras partes: edição de conteúdo por um painel, um blog, páginas de serviços e melhorias no formulário. Neste post, quero deixar o registro de como essa construção aconteceu tecnicamente e, depois, dos ajustes de interface e usabilidade. Este é um registro do código, do histórico e da documentação.
 
 ## Como o site foi construído
 
@@ -58,7 +57,7 @@ A versão e o changelog são mantidos pela automação Release Please.
 
 A evolução foi acompanhada de testes das regras do formulário, dos componentes, do conteúdo e das integrações. Os testes com Testing Library verificam interações, enquanto os testes com Playwright conferem comportamentos e layout no navegador.
 
-Nas correções documentadas, o processo utiliza TDD: primeiro reproduzir o problema com um teste em falha, depois implementar a correção e executar novamente a verificação. 
+Nas correções documentadas, o processo utiliza TDD: primeiro reproduzir o problema com um teste em falha, depois implementar a correção e executar novamente a verificação.
 Também (obviamente) existem checagens de tipos com TypeScript e de qualidade do código com ESLint.
 
 Os estilos foram reorganizados em arquivos por responsabilidade, como cabeçalho, serviços, formulário e páginas do blog.
@@ -108,5 +107,5 @@ E o livro do Rian Dultra [Enviesados](https://a.co/d/0gALu2dX) pois precisei pes
 O histórico mostra a passagem de uma página de apresentação para um site com conteúdo editável, publicação de artigos e um fluxo de orçamento mais estruturado.
 As mudanças de UI e UX acompanharam essa evolução, principalmente na navegação, na apresentação dos serviços e no formulário.
 
-O código e os testes ajudam sempre a registrar o comportamento esperado. Para avaliar o resultado com as pessoas que usam o site, ainda é necessário observar o uso e reunir dados. 
+O código e os testes ajudam sempre a registrar o comportamento esperado. Para avaliar o resultado com as pessoas que usam o site, ainda é necessário observar o uso e reunir dados.
 Não dá para concluir que uma mudança visual aumentou os pedidos de orçamento apenas porque foi implementada (então isso ainda está sendo medido)
